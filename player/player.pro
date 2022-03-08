@@ -27,13 +27,16 @@ DESTDIR     = $$PWD/../bin
 
 SOURCES += \
         main.cpp \
-        widget.cpp
+        widget.cpp \
+    mainwindow.cpp
 
 HEADERS += \
-        widget.h
+        widget.h \
+    mainwindow.h
 
 FORMS += \
-        widget.ui
+    widget.ui \
+    mainwindow.ui
 
 CONFIG += warn_off
 

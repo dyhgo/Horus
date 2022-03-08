@@ -2,6 +2,7 @@
 #include "widget.h"
 #include <QApplication>
 #include <QTextCodec>
+#include "mainwindow.h"
 
 int main(int argc, char* argv[]) {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0))
@@ -29,7 +30,10 @@ int main(int argc, char* argv[]) {
 #endif
 
 
-    Widget w;
+//    Widget w;
+//    w.setWindowTitle("视频流播放ffmpeg内核");
+//    w.show();
+    MainWindow w;
     w.setWindowTitle("视频流播放ffmpeg内核");
     w.show();
 
