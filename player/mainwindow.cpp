@@ -1,5 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMenu>
+
+void MainWindow::setActionForButton() {
+    ui->btnOne->setDefaultAction(ui->actOne);
+    ui->btnFour->setDefaultAction(ui->actFour);
+    ui->btnNine->setDefaultAction(ui->actNine);
+    ui->btnSixteen->setDefaultAction(ui->actSixteen);
+}
 
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
@@ -13,6 +21,8 @@ MainWindow::MainWindow(QWidget* parent) :
     }
 
     ui->gridLayout->addWidget(widgets.at(0), 0, 0);
+
+    setActionForButton();
 }
 
 MainWindow::~MainWindow() {
@@ -26,9 +36,7 @@ void MainWindow::hide_all_videos() {
     }
 }
 
-
-
-void MainWindow::on_btnOne_clicked() {
+void MainWindow::on_actOne_triggered() {
     hide_all_videos();
     ui->gridLayout->addWidget(widgets.at(0), 0, 0);
     for (int i = 0; i < 1; ++i) {
@@ -36,7 +44,7 @@ void MainWindow::on_btnOne_clicked() {
     }
 }
 
-void MainWindow::on_btnFour_clicked() {
+void MainWindow::on_actFour_triggered() {
     hide_all_videos();
 
     for (int i = 0; i < 2; ++i) {
@@ -49,7 +57,7 @@ void MainWindow::on_btnFour_clicked() {
     }
 }
 
-void MainWindow::on_btnNine_clicked() {
+void MainWindow::on_actNine_triggered() {
     hide_all_videos();
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
@@ -61,7 +69,7 @@ void MainWindow::on_btnNine_clicked() {
     }
 }
 
-void MainWindow::on_btnSixteen_clicked() {
+void MainWindow::on_actSixteen_triggered() {
     hide_all_videos();
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
@@ -71,4 +79,15 @@ void MainWindow::on_btnSixteen_clicked() {
     for (int i = 0; i < 16; ++i) {
         widgets.at(i)->setVisible(true);
     }
+}
+
+void MainWindow::on_MainWindow_customContextMenuRequested(const QPoint& pos) {
+    Q_UNUSED(pos);
+    QMenu* menu = new QMenu(this);
+    menu->addAction(ui->actOne);
+    menu->addAction(ui->actFour);
+    menu->addAction(ui->actNine);
+    menu->addAction(ui->actSixteen);
+    menu->exec(QCursor::pos());
+    delete menu;
 }
