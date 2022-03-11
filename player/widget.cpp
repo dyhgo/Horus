@@ -14,9 +14,8 @@ Widget::Widget(QWidget* parent) :
     urls << "rtsp://192.168.1.15:554/media/video2";
     urls << "rtsp://192.168.1.247:554/av0_0";
     urls << "rtsp://192.168.1.247:554/av0_1";
-    urls << "rtmp://58.200.131.2:1935/livetv/cctv1";
+    urls << "rtmp://ivi.bupt.edu.cn:1935/livetv/cctv5phd";
     urls << "rtmp://hls.hsrtv.cn/hls/hstv1";
-    urls << "rtmp://ns8.indexforce.com/home/mystream";
     ui->cboxUrl->addItems(urls);
     ui->cboxUrl->setCurrentIndex(0);
 }
