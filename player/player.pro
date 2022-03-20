@@ -48,3 +48,6 @@ CONFIG += warn_off
 
 INCLUDEPATH += $$PWD/ffmpeg
 include ($$PWD/ffmpeg/ffmpeg.pri)
+
+RESOURCES += \
+    res.qrc
