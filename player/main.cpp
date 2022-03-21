@@ -3,12 +3,15 @@
 #include <QApplication>
 #include <QTextCodec>
 #include "realmainwindow.h"
+#include "appinit.h"
+
 
 int main(int argc, char* argv[]) {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0))
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
     QApplication a(argc, argv);
+
 
     QFont font;
     font.setFamily("MicroSoft Yahei");
@@ -29,6 +32,7 @@ int main(int argc, char* argv[]) {
     QTextCodec::setCodecForLocale(codec);
 #endif
 
+    //AppInit::Instance()->start();
 
 //    Widget w;
 //    w.setWindowTitle("视频流播放ffmpeg内核");
@@ -38,8 +42,10 @@ int main(int argc, char* argv[]) {
 //    w.setWindowTitle("视频流播放ffmpeg内核");
 //    w.show();
 
+
+
     RealMainWindow w;
-    w.setWindowTitle("视频流播放ffmpeg内核");
+    //w.setWindowTitle("视频流播放ffmpeg内核");
     w.show();
 
     return a.exec();

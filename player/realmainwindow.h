@@ -16,6 +16,15 @@ class RealMainWindow : public QMainWindow {
     explicit RealMainWindow(QWidget* parent = 0);
     ~RealMainWindow();
 
+  private slots:
+
+
+    void on_btnClose_clicked();
+
+    void on_btnMaximize_clicked();
+
+    void on_btnMinimize_clicked();
+
   private:
     Ui::RealMainWindow* ui;
 };

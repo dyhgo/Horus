@@ -30,13 +30,15 @@ SOURCES += \
         widget.cpp \
     mainwindow.cpp \
     realmainwindow.cpp \
-    playback.cpp
+    playback.cpp \
+    appinit.cpp
 
 HEADERS += \
         widget.h \
     mainwindow.h \
     realmainwindow.h \
-    playback.h
+    playback.h \
+    appinit.h
 
 FORMS += \
     widget.ui \
