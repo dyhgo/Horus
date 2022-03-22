@@ -7,38 +7,7 @@ RealMainWindow::RealMainWindow(QWidget* parent) :
     QWidget(parent),
     ui(new Ui::RealMainWindow) {
     ui->setupUi(this);
-
-    ui->widgetTitle->installEventFilter(this);
-
-    isLeftButtonPressed = false;
-    this->dir = NONE;
-    this->setWindowFlags(Qt::FramelessWindowHint);
-    this->setMinimumWidth(500);
-    this->setMinimumHeight(100);
-    this->setMouseTracking(true);
-
-    this->setProperty("movable", true);
-    this->setProperty("resizable", true);
-
-
-//    MainWindow* w = new MainWindow();
-//    ui->tabWidget->clear();
-//    ui->tabWidget->addTab(w, "视频监控界面");
-//    ui->tabWidget->setCurrentIndex(0);
-
-//    Playback* p = new Playback();
-//    ui->tabWidget->addTab(p, "视频回放界面");
-
-
-    QPixmap pic;
-    pic.load(":/res/images/camera.png");
-    pic = pic.scaled(67, 70);
-    ui->labIcon->setPixmap(pic);
-
-    QFont font;
-    font.setPixelSize(30);
-    ui->labTitle->setFont(font);
-    ui->labTitle->setText("视频监控平台");
+    init();
 
 }
 
@@ -203,6 +172,54 @@ void RealMainWindow::region(const QPoint& cursorGlobalPoint) {
     }
 }
 
+void RealMainWindow::init() {
+    ui->widgetTitle->installEventFilter(this);
+
+    isLeftButtonPressed = false;
+    this->dir = NONE;
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    this->setMinimumWidth(1200);
+    this->setMinimumHeight(400);
+    this->setMouseTracking(true);
+
+    this->setProperty("movable", true);
+    this->setProperty("resizable", true);
+
+
+    QPixmap pic;
+    pic.load(":/res/images/camera.png");
+    pic = pic.scaled(67, 70);
+    ui->labIcon->setPixmap(pic);
+
+    QFont font;
+    font.setPixelSize(30);
+    ui->labTitle->setFont(font);
+    ui->labTitle->setText("视频监控平台");
+
+    //    MainWindow* w = new MainWindow();
+    //    ui->tabWidget->clear();
+    //    ui->tabWidget->addTab(w, "视频监控界面");
+    //    ui->tabWidget->setCurrentIndex(0);
+
+    //    Playback* p = new Playback();
+    //    ui->tabWidget->addTab(p, "视频回放界面");
+
+
+
+    QList<QToolButton*> btns = ui->widget->findChildren<QToolButton*>();
+    foreach (QToolButton* btn, btns) {
+        btn->setCheckable(true);
+        connect(btn, SIGNAL(clicked()), this, SLOT(btnClicked()));
+    }
+
+    MainWindow* w = new MainWindow();
+    ui->stackedWidget->addWidget(w);
+    Playback* p = new Playback();
+    ui->stackedWidget->addWidget(p);
+    ui->btnMonitor->setChecked(true);
+    ui->btnMonitor->click();
+}
+
 void RealMainWindow::on_btnClose_clicked() {
     close();
 }
@@ -223,4 +240,18 @@ void RealMainWindow::on_btnMaximize_clicked() {
 
 void RealMainWindow::on_btnMinimize_clicked() {
     showMinimized();
+}
+
+void RealMainWindow::btnClicked() {
+    QToolButton* b = (QToolButton*) sender();
+    QString name = b->text();
+    QList<QToolButton*> btns = ui->widget->findChildren<QToolButton*>();
+    foreach (QToolButton* btn, btns) {
+        btn->setChecked(btn == b);
+    }
+    if (name == "视频监控界面") {
+        ui->stackedWidget->setCurrentIndex(0);
+    } else if (name == "视频回放界面") {
+        ui->stackedWidget->setCurrentIndex(1);
+    }
 }

@@ -38,6 +38,7 @@ class RealMainWindow : public QWidget {
   private:
 
     void region(const QPoint& cursorGlobalPoint);
+    void init();
 
   protected:
 
@@ -61,6 +62,7 @@ class RealMainWindow : public QWidget {
     void on_btnMaximize_clicked();
 
     void on_btnMinimize_clicked();
+    void btnClicked();
 
   private:
     Ui::RealMainWindow* ui;
