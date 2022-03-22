@@ -8,12 +8,14 @@ RealMainWindow::RealMainWindow(QWidget* parent) :
     ui(new Ui::RealMainWindow) {
     ui->setupUi(this);
 
+    ui->widgetTitle->installEventFilter(this);
+
     isLeftButtonPressed = false;
     this->dir = NONE;
     this->setWindowFlags(Qt::FramelessWindowHint);
     this->setMinimumWidth(500);
     this->setMinimumHeight(100);
-    //this->setProperty("canMove", true);
+    //this->setProperty("canMove", false);
     this->setMouseTracking(true);
 
 
@@ -118,6 +120,14 @@ void RealMainWindow::mousePressEvent(QMouseEvent* event) {
         }
     }
     QWidget::mousePressEvent(event);
+}
+
+bool RealMainWindow::eventFilter(QObject* watched, QEvent* event) {
+    if (watched == ui->widgetTitle && event->type() == QEvent::MouseButtonDblClick) {
+        on_btnMaximize_clicked();
+        return true;
+    }
+    return QWidget::eventFilter(watched, event);
 }
 
 void RealMainWindow::region(const QPoint& cursorGlobalPoint) {

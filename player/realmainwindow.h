@@ -43,6 +43,8 @@ class RealMainWindow : public QWidget {
     void mouseMoveEvent(QMouseEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
 
+    bool eventFilter(QObject* watched, QEvent* event) override;
+
   private:
 
     bool isLeftButtonPressed;
