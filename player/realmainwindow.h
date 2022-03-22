@@ -8,6 +8,8 @@
 #include <QPoint>
 #include <QCursor>
 #include <QRect>
+#include <QDebug>
+#include <iostream>
 #define PADDING 2
 
 namespace Ui {

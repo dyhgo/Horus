@@ -28,6 +28,18 @@ RealMainWindow::RealMainWindow(QWidget* parent) :
 
 //    Playback* p = new Playback();
 //    ui->tabWidget->addTab(p, "视频回放界面");
+
+
+    QPixmap pic;
+    pic.load(":/res/images/camera.png");
+    pic = pic.scaled(67, 70);
+    ui->labIcon->setPixmap(pic);
+
+    QFont font;
+    font.setPixelSize(30);
+    ui->labTitle->setFont(font);
+    ui->labTitle->setText("视频监控平台");
+
 }
 
 RealMainWindow::~RealMainWindow() {
