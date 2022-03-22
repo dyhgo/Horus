@@ -15,8 +15,10 @@ RealMainWindow::RealMainWindow(QWidget* parent) :
     this->setWindowFlags(Qt::FramelessWindowHint);
     this->setMinimumWidth(500);
     this->setMinimumHeight(100);
-    //this->setProperty("canMove", false);
     this->setMouseTracking(true);
+
+    this->setProperty("movable", true);
+    this->setProperty("resizable", true);
 
 
 //    MainWindow* w = new MainWindow();
@@ -35,6 +37,10 @@ RealMainWindow::~RealMainWindow() {
 
 
 void RealMainWindow::mouseReleaseEvent(QMouseEvent* event) {
+    if (!this->property("movable").toBool() && !this->property("resizable").toBool()) {
+        QWidget::mouseReleaseEvent(event);
+        return ;
+    }
     if (event->button() == Qt::LeftButton) {
         isLeftButtonPressed = false;
         if (dir != NONE) {
@@ -42,9 +48,14 @@ void RealMainWindow::mouseReleaseEvent(QMouseEvent* event) {
             this->setCursor(QCursor(Qt::ArrowCursor));
         }
     }
+    QWidget::mouseReleaseEvent(event);
 }
 
 void RealMainWindow::mouseMoveEvent(QMouseEvent* event) {
+    if (!this->property("movable").toBool() && !this->property("resizable").toBool()) {
+        QWidget::mouseMoveEvent(event);
+        return ;
+    }
     QPoint gloPoint = event->globalPos();
     QRect rect = this->rect();
     QPoint tl = mapToGlobal(rect.topLeft());
@@ -111,6 +122,10 @@ void RealMainWindow::mouseMoveEvent(QMouseEvent* event) {
 }
 
 void RealMainWindow::mousePressEvent(QMouseEvent* event) {
+    if (!this->property("movable").toBool() && !this->property("resizable").toBool()) {
+        QWidget::mousePressEvent(event);
+        return ;
+    }
     if (event->button() == Qt::LeftButton) {
         isLeftButtonPressed = true;
         if (dir != NONE) {
@@ -184,8 +199,12 @@ void RealMainWindow::on_btnMaximize_clicked() {
     static bool max = false;
     if (max) {
         showNormal();
+        this->setProperty("movable", true);
+        this->setProperty("resizable", true);
     } else {
         showMaximized();
+        this->setProperty("movable", false);
+        this->setProperty("resizable", false);
     }
     max = !max;
 }
