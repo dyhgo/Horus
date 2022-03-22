@@ -14,6 +14,8 @@ class AppInit : public QObject {
 
   private:
     static QScopedPointer<AppInit> self;
+    static void moveWindow(QObject* watched, QEvent* event);
+    static void scaleWindow(QObject* watched, QEvent* event);
 
   signals:
 

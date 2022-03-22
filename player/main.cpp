@@ -45,7 +45,6 @@ int main(int argc, char* argv[]) {
 
 
     RealMainWindow w;
-    //w.setWindowTitle("视频流播放ffmpeg内核");
     w.show();
 
     return a.exec();

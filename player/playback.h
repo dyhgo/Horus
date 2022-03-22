@@ -1,22 +1,21 @@
 #ifndef PLAYBACK_H
 #define PLAYBACK_H
 
-#include <QMainWindow>
+#include <QWidget>
 
 namespace Ui {
 class Playback;
 }
 
-class Playback : public QMainWindow
-{
+class Playback : public QWidget {
     Q_OBJECT
 
-public:
-    explicit Playback(QWidget *parent = 0);
+  public:
+    explicit Playback(QWidget* parent = 0);
     ~Playback();
 
-private:
-    Ui::Playback *ui;
+  private:
+    Ui::Playback* ui;
 };
 
 #endif // PLAYBACK_H

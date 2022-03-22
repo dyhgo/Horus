@@ -1,20 +1,53 @@
 #ifndef REALMAINWINDOW_H
 #define REALMAINWINDOW_H
 
-#include <QMainWindow>
+#include <QWidget>
 #include "mainwindow.h"
 #include "playback.h"
+#include <QMouseEvent>
+#include <QPoint>
+#include <QCursor>
+#include <QRect>
+#define PADDING 2
 
 namespace Ui {
 class RealMainWindow;
 }
 
-class RealMainWindow : public QMainWindow {
+enum Direction {
+    TOP = 0,
+    BOTTOM = 1,
+    LEFT,
+    RIGHT,
+    TOPLEFT,
+    BOTTOMLEFT,
+    TOPRIGHT,
+    BOTTOMRIGHT,
+    NONE
+};
+
+class RealMainWindow : public QWidget {
     Q_OBJECT
 
   public:
     explicit RealMainWindow(QWidget* parent = 0);
     ~RealMainWindow();
+
+  private:
+
+    void region(const QPoint& cursorGlobalPoint);
+
+  protected:
+
+    void mouseReleaseEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+
+  private:
+
+    bool isLeftButtonPressed;
+    QPoint mousePoint;
+    Direction dir;
 
   private slots:
 
