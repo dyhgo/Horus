@@ -1,5 +1,6 @@
 #include "realmainwindow.h"
 #include "ui_realmainwindow.h"
+#include "mainwindow.h"
 #include <QTabWidget>
 
 
@@ -173,12 +174,15 @@ void RealMainWindow::region(const QPoint& cursorGlobalPoint) {
 }
 
 void RealMainWindow::init() {
+
+
+
     ui->widgetTitle->installEventFilter(this);
 
     isLeftButtonPressed = false;
     this->dir = NONE;
     this->setWindowFlags(Qt::FramelessWindowHint);
-    this->setMinimumWidth(1200);
+    this->setMinimumWidth(1200 + 170);
     this->setMinimumHeight(400);
     this->setMouseTracking(true);
 
@@ -213,6 +217,7 @@ void RealMainWindow::init() {
     }
 
     MainWindow* w = new MainWindow();
+    //qDebug() << (w == nullptr);
     ui->stackedWidget->addWidget(w);
     Playback* p = new Playback();
     ui->stackedWidget->addWidget(p);

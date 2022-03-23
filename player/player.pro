@@ -46,7 +46,7 @@ FORMS += \
     realmainwindow.ui \
     playback.ui
 
-CONFIG += warn_off
+CONFIG += warn_off console
 
 INCLUDEPATH += $$PWD/ffmpeg
 include ($$PWD/ffmpeg/ffmpeg.pri)

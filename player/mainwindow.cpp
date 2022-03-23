@@ -9,20 +9,37 @@ void MainWindow::setActionForButton() {
     ui->btnSixteen->setDefaultAction(ui->actSixteen);
 }
 
-MainWindow::MainWindow(QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::MainWindow) {
-    ui->setupUi(this);
-
-
+void MainWindow::init() {
     for (int i = 0; i < 16; ++i) {
         Widget* widget = new Widget();
+
         widgets.push_back(widget);
     }
 
     ui->gridLayout->addWidget(widgets.at(0), 0, 0);
 
     setActionForButton();
+
+
+
+    ui->treeDevices->clear();
+    QTreeWidgetItem* item = new QTreeWidgetItem(ui->treeDevices);
+    item->setText(0, "设备1");
+    ui->treeDevices->addTopLevelItem(item);
+    QTreeWidgetItem* item2 = new QTreeWidgetItem(ui->treeDevices);
+    item2->setText(0, "设备2");
+    ui->treeDevices->addTopLevelItem(item2);
+
+
+
+}
+
+MainWindow::MainWindow(QWidget* parent) :
+    QWidget(parent),
+    ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+
+    init();
 }
 
 MainWindow::~MainWindow() {

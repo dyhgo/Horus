@@ -1,7 +1,17 @@
 ﻿#include "ffmpeg.h"
+#include "qfontdatabase.h"
+#include "qpushbutton.h"
+#include "qtreewidget.h"
+#include "qlayout.h"
+#include "qtimer.h"
+#include "qdir.h"
+#include "qpainter.h"
+#include "qevent.h"
+#include "qmimedata.h"
+#include "qurl.h"
+#include "qdebug.h"
 
-FFmpegThread::FFmpegThread(QObject *parent) : QThread(parent)
-{
+FFmpegThread::FFmpegThread(QObject* parent) : QThread(parent) {
     setObjectName("FFmpegThread");
     stopped = false;
     isPlay = false;
@@ -35,8 +45,7 @@ FFmpegThread::FFmpegThread(QObject *parent) : QThread(parent)
 }
 
 //一个软件中只需要初始化一次就行
-void FFmpegThread::initlib()
-{
+void FFmpegThread::initlib() {
     static QMutex mutex;
     QMutexLocker locker(&mutex);
     static bool isInit = false;
@@ -55,7 +64,7 @@ void FFmpegThread::initlib()
 #if 0
         //输出所有支持的解码器名称
         QStringList listCodeName;
-        AVCodec *code = av_codec_next(NULL);
+        AVCodec* code = av_codec_next(NULL);
         while (code != NULL) {
             listCodeName << code->name;
             code = code->next;
@@ -66,8 +75,7 @@ void FFmpegThread::initlib()
     }
 }
 
-bool FFmpegThread::init()
-{
+bool FFmpegThread::init() {
     //在打开码流前指定各种参数比如:探测时间/超时时间/最大延时等
     //设置缓存大小,1080p可将值调大
     av_dict_set(&options, "buffer_size", "8192000", 0);
@@ -110,7 +118,7 @@ bool FFmpegThread::init()
         }
 
         //获取视频流
-        AVStream *videoStream = avFormatContext->streams[videoStreamIndex];
+        AVStream* videoStream = avFormatContext->streams[videoStreamIndex];
 
         //获取视频流解码器,或者指定解码器
         videoCodec = videoStream->codec;
@@ -165,7 +173,7 @@ bool FFmpegThread::init()
             qDebug() << TIMEMS << "find audio stream index error";
         } else {
             //获取音频流
-            AVStream *audioStream = avFormatContext->streams[audioStreamIndex];
+            AVStream* audioStream = avFormatContext->streams[audioStreamIndex];
             audioCodec = audioStream->codec;
 
             //获取音频流解码器,或者指定解码器
@@ -200,7 +208,7 @@ bool FFmpegThread::init()
     //比较上一次文件的宽度高度,当改变时,需要重新分配内存
     if (oldWidth != videoWidth || oldHeight != videoHeight) {
         int byte = avpicture_get_size(AV_PIX_FMT_RGB32, videoWidth, videoHeight);
-        buffer = (uint8_t *)av_malloc(byte * sizeof(uint8_t));
+        buffer = (uint8_t*)av_malloc(byte * sizeof(uint8_t));
         oldWidth = videoWidth;
         oldHeight = videoHeight;
     }
@@ -229,8 +237,7 @@ bool FFmpegThread::init()
     return true;
 }
 
-void FFmpegThread::run()
-{
+void FFmpegThread::run() {
     while (!stopped) {
         //根据标志位执行初始化操作
         if (isPlay) {
@@ -253,7 +260,7 @@ void FFmpegThread::run()
                     continue;
                 }
 
-                frameFinish = avcodec_receive_frame(videoCodec, avFrame2);                
+                frameFinish = avcodec_receive_frame(videoCodec, avFrame2);
                 if (frameFinish < 0) {
                     continue;
                 }
@@ -261,11 +268,11 @@ void FFmpegThread::run()
 
                 if (frameFinish >= 0) {
                     //将数据转成一张图片
-                    sws_scale(swsContext, (const uint8_t *const *)avFrame2->data, avFrame2->linesize, 0, videoHeight, avFrame3->data, avFrame3->linesize);
+                    sws_scale(swsContext, (const uint8_t* const*)avFrame2->data, avFrame2->linesize, 0, videoHeight, avFrame3->data, avFrame3->linesize);
 
                     //以下两种方法都可以
                     //QImage image(avFrame3->data[0], videoWidth, videoHeight, QImage::Format_RGB32);
-                    QImage image((uchar *)buffer, videoWidth, videoHeight, QImage::Format_RGB32);
+                    QImage image((uchar*)buffer, videoWidth, videoHeight, QImage::Format_RGB32);
                     if (!image.isNull()) {
                         emit receiveImage(image);
                     }
@@ -289,13 +296,11 @@ void FFmpegThread::run()
     qDebug() << TIMEMS << "stop ffmpeg thread";
 }
 
-void FFmpegThread::setUrl(const QString &url)
-{
+void FFmpegThread::setUrl(const QString& url) {
     this->url = url;
 }
 
-void FFmpegThread::free()
-{
+void FFmpegThread::free() {
     if (swsContext != NULL) {
         sws_freeContext(swsContext);
         swsContext = NULL;
@@ -340,43 +345,49 @@ void FFmpegThread::free()
     //qDebug() << TIMEMS << "close ffmpeg ok";
 }
 
-void FFmpegThread::play()
-{
+void FFmpegThread::play() {
     //通过标志位让线程执行初始化
     isPlay = true;
 }
 
-void FFmpegThread::pause()
-{
+void FFmpegThread::pause() {
 
 }
 
-void FFmpegThread::next()
-{
+void FFmpegThread::next() {
 
 }
 
-void FFmpegThread::stop()
-{
+void FFmpegThread::stop() {
     //通过标志位让线程停止
     stopped = true;
 }
 
 //实时视频显示窗体类
-FFmpegWidget::FFmpegWidget(QWidget *parent) : QWidget(parent)
-{
+FFmpegWidget::FFmpegWidget(QWidget* parent) : QWidget(parent) {
     thread = new FFmpegThread(this);
     connect(thread, SIGNAL(receiveImage(QImage)), this, SLOT(updateImage(QImage)));
     image = QImage();
+
+    flowBgColor = "#000000";
+    flowPressColor = "#5EC7D9";
+    borderWidth = 5;
+
+    setFocusPolicy(Qt::StrongFocus);
+    //设置支持拖放
+    setAcceptDrops(true);
+
+    this->setFlowEnable(true);
+    this->initFlowPanel();
+    this->initFlowStyle();
+
 }
 
-FFmpegWidget::~FFmpegWidget()
-{
+FFmpegWidget::~FFmpegWidget() {
     close();
 }
 
-void FFmpegWidget::paintEvent(QPaintEvent *)
-{
+void FFmpegWidget::paintEvent(QPaintEvent*) {
     if (image.isNull()) {
         return;
     }
@@ -386,20 +397,17 @@ void FFmpegWidget::paintEvent(QPaintEvent *)
     painter.drawImage(this->rect(), image);
 }
 
-void FFmpegWidget::updateImage(const QImage &image)
-{
+void FFmpegWidget::updateImage(const QImage& image) {
     //this->image = image.copy();
     this->image = image;
     this->update();
 }
 
-void FFmpegWidget::setUrl(const QString &url)
-{
+void FFmpegWidget::setUrl(const QString& url) {
     thread->setUrl(url);
 }
 
-void FFmpegWidget::open()
-{
+void FFmpegWidget::open() {
     //qDebug() << TIMEMS << "open video" << objectName();
     clear();
 
@@ -407,18 +415,15 @@ void FFmpegWidget::open()
     thread->start();
 }
 
-void FFmpegWidget::pause()
-{
+void FFmpegWidget::pause() {
     thread->pause();
 }
 
-void FFmpegWidget::next()
-{
+void FFmpegWidget::next() {
     thread->next();
 }
 
-void FFmpegWidget::close()
-{
+void FFmpegWidget::close() {
     //qDebug() << TIMEMS << "close video" << objectName();
     if (thread->isRunning()) {
         thread->stop();
@@ -429,8 +434,160 @@ void FFmpegWidget::close()
     QTimer::singleShot(1, this, SLOT(clear()));
 }
 
-void FFmpegWidget::clear()
-{
+void FFmpegWidget::clear() {
     image = QImage();
     update();
+}
+
+// =================================以下是悬浮条=====================================
+
+void FFmpegWidget::initFlowPanel() {
+    //顶部工具栏,默认隐藏,鼠标移入显示移除隐藏
+    flowPanel = new QWidget(this);
+    flowPanel->setObjectName("flowPanel");
+    flowPanel->setVisible(false);
+
+    //用布局顶住,左侧弹簧
+    QHBoxLayout* layout = new QHBoxLayout;
+    layout->setSpacing(2);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->addStretch();
+    flowPanel->setLayout(layout);
+
+    //按钮集合名称,如果需要新增按钮则在这里增加即可
+    QList<QString> btns;
+    btns << "btnFlowVideo" << "btnFlowSnap" << "btnFlowSound" << "btnFlowAlarm" << "btnFlowClose";
+
+    //有多种办法来设置图片,qt内置的图标+自定义的图标+图形字体
+    //既可以设置图标形式,也可以直接图形字体设置文本
+#if 0
+    QList<QIcon> icons;
+    icons << QApplication::style()->standardIcon(QStyle::SP_ComputerIcon);
+    icons << QApplication::style()->standardIcon(QStyle::SP_FileIcon);
+    icons << QApplication::style()->standardIcon(QStyle::SP_DirIcon);
+    icons << QApplication::style()->standardIcon(QStyle::SP_DialogOkButton);
+    icons << QApplication::style()->standardIcon(QStyle::SP_DialogCancelButton);
+#else
+    QList<int> icons;
+    icons << 0xe68d << 0xe672 << 0xe674 << 0xea36 << 0xe74c;
+
+    //判断图形字体是否存在,不存在则加入
+    QFont iconFont;
+    QFontDatabase fontDb;
+    if (!fontDb.families().contains("iconfont")) {
+        int fontId = fontDb.addApplicationFont(":/res/font/iconfont.ttf");
+        QStringList fontName = fontDb.applicationFontFamilies(fontId);
+        if (fontName.count() == 0) {
+            qDebug() << "load iconfont.ttf error";
+        }
+    }
+
+    if (fontDb.families().contains("iconfont")) {
+        iconFont = QFont("iconfont");
+        iconFont.setPixelSize(17);
+#if (QT_VERSION >= QT_VERSION_CHECK(4,8,0))
+        iconFont.setHintingPreference(QFont::PreferNoHinting);
+#endif
+    }
+#endif
+
+    //循环添加顶部按钮
+    for (int i = 0; i < btns.count(); i++) {
+        QPushButton* btn = new QPushButton;
+        //绑定按钮单击事件,用来发出信号通知
+        //connect(btn, SIGNAL(clicked(bool)), this, SLOT(btnClicked()));
+        //设置标识,用来区别按钮
+        btn->setObjectName(btns.at(i));
+        //设置固定宽度
+        btn->setFixedWidth(20);
+        //设置拉伸策略使得填充
+        btn->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        //设置焦点策略为无焦点,避免单击后焦点跑到按钮上
+        btn->setFocusPolicy(Qt::NoFocus);
+
+#if 0
+        //设置图标大小和图标
+        btn->setIconSize(QSize(16, 16));
+        btn->setIcon(icons.at(i));
+#else
+        btn->setFont(iconFont);
+        btn->setText((QChar)icons.at(i));
+#endif
+
+        //将按钮加到布局中
+        layout->addWidget(btn);
+    }
+}
+
+void FFmpegWidget::initFlowStyle() {
+    //设置样式以便区分,可以自行更改样式,也可以不用样式
+    QStringList qss;
+    QString rgba = QString("rgba(%1,%2,%3,150)").arg(flowBgColor.red()).arg(flowBgColor.green()).arg(flowBgColor.blue());
+    qss.append(QString("#flowPanel{background:%1;border:none;}").arg(rgba));
+    qss.append(QString("QPushButton{border:none;padding:0px;background:rgba(0,0,0,0);}"));
+    qss.append(QString("QPushButton:pressed{color:%1;}").arg(flowPressColor.name()));
+    flowPanel->setStyleSheet(qss.join(""));
+}
+
+
+
+//void FFmpegWidget::btnClicked() {
+
+//}
+
+bool FFmpegWidget::getFlowEnable() const {
+    return this->flowEnable;
+}
+
+QColor FFmpegWidget::getFlowBgColor() const {
+    return this->flowBgColor;
+}
+
+QColor FFmpegWidget::getFlowPressColor() const {
+    return this->flowPressColor;
+}
+
+void FFmpegWidget::setFlowEnable(bool flowEnable) {
+    this->flowEnable = flowEnable;
+}
+
+void FFmpegWidget::setFlowBgColor(const QColor& flowBgColor) {
+    if (this->flowBgColor != flowBgColor) {
+        this->flowBgColor = flowBgColor;
+        this->initFlowStyle();
+    }
+}
+
+void FFmpegWidget::setFlowPressColor(const QColor& flowPressColor) {
+    if (this->flowPressColor != flowPressColor) {
+        this->flowPressColor = flowPressColor;
+        this->initFlowStyle();
+    }
+}
+
+void FFmpegWidget::resizeEvent(QResizeEvent*) {
+    //重新设置顶部工具栏的位置和宽高,可以自行设置顶部显示或者底部显示
+    int height = 20;
+    flowPanel->setGeometry(borderWidth, borderWidth, this->width() - (borderWidth * 2), height);
+    //flowPanel->setGeometry(borderWidth, this->height() - height - borderWidth, this->width() - (borderWidth * 2), height);
+
+}
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+void FFmpegWidget::enterEvent(QEnterEvent*)
+#else
+void FFmpegWidget::enterEvent(QEvent*)
+#endif
+{
+    //这里还可以增加一个判断,是否获取了焦点的才需要显示
+    if (this->hasFocus()) {}
+    if (flowEnable) {
+        flowPanel->setVisible(true);
+    }
+}
+
+void FFmpegWidget::leaveEvent(QEvent*) {
+    if (flowEnable) {
+        flowPanel->setVisible(false);
+    }
 }

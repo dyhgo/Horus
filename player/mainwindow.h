@@ -14,6 +14,7 @@ class MainWindow : public QWidget {
   private:
 
     void setActionForButton();
+    void init();
 
   public:
     explicit MainWindow(QWidget* parent = 0);

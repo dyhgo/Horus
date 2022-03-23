@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/res">
         <file>images/camera.png</file>
+        <file>font/iconfont.ttf</file>
     </qresource>
 </RCC>

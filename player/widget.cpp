@@ -16,8 +16,13 @@ Widget::Widget(QWidget* parent) :
     urls << "rtsp://192.168.1.247:554/av0_1";
     urls << "rtmp://ivi.bupt.edu.cn:1935/livetv/cctv5phd";
     urls << "rtmp://hls.hsrtv.cn/hls/hstv1";
+    urls << "rtmp://hls.hsrtv.cn/hls/hstv2";
     ui->cboxUrl->addItems(urls);
     ui->cboxUrl->setCurrentIndex(0);
+
+//    ui->playWidget->setFlowEnable(true);
+//    ui->playWidget->initFlowPanel();
+//    ui->playWidget->initFlowStyle();
 }
 
 Widget::~Widget() {
