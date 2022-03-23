@@ -16,10 +16,15 @@ class Widget : public QWidget {
     ~Widget();
 
   private slots:
-    void on_btnOpen_clicked();
+    //void on_btnOpen_clicked();
 
   private:
     Ui::Widget* ui;
+
+  protected:
+
+    void enterEvent(QEvent*) override;
+    void leaveEvent(QEvent*) override;
 };
 
 #endif // WIDGET_H

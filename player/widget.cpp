@@ -17,8 +17,8 @@ Widget::Widget(QWidget* parent) :
     urls << "rtmp://ivi.bupt.edu.cn:1935/livetv/cctv5phd";
     urls << "rtmp://hls.hsrtv.cn/hls/hstv1";
     urls << "rtmp://hls.hsrtv.cn/hls/hstv2";
-    ui->cboxUrl->addItems(urls);
-    ui->cboxUrl->setCurrentIndex(0);
+//    ui->cboxUrl->addItems(urls);
+//    ui->cboxUrl->setCurrentIndex(0);
 
 //    ui->playWidget->setFlowEnable(true);
 //    ui->playWidget->initFlowPanel();
@@ -29,14 +29,22 @@ Widget::~Widget() {
     delete ui;
 }
 
-void Widget::on_btnOpen_clicked() {
-    if (ui->btnOpen->text() == "打开") {
-        ui->btnOpen->setText("关闭");
-        QString url = ui->cboxUrl->currentText().trimmed();
-        ui->playWidget->setUrl(url);
-        ui->playWidget->open();
-    } else {
-        ui->btnOpen->setText("打开");
-        ui->playWidget->close();
-    }
+void Widget::enterEvent(QEvent*) {
+    ui->frame->setStyleSheet("border:1px solid blue");
 }
+
+void Widget::leaveEvent(QEvent*) {
+    ui->frame->setStyleSheet("border:1px solid gray");
+}
+
+//void Widget::on_btnOpen_clicked() {
+//    if (ui->btnOpen->text() == "打开") {
+//        ui->btnOpen->setText("关闭");
+//        QString url = ui->cboxUrl->currentText().trimmed();
+//        ui->playWidget->setUrl(url);
+//        ui->playWidget->open();
+//    } else {
+//        ui->btnOpen->setText("打开");
+//        ui->playWidget->close();
+//    }
+//}

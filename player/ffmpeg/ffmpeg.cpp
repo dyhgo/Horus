@@ -584,6 +584,7 @@ void FFmpegWidget::enterEvent(QEvent*)
     if (flowEnable) {
         flowPanel->setVisible(true);
     }
+
 }
 
 void FFmpegWidget::leaveEvent(QEvent*) {

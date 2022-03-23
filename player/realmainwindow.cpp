@@ -164,8 +164,8 @@ void RealMainWindow::region(const QPoint& cursorGlobalPoint) {
         this->setCursor(QCursor(Qt::SizeVerCursor));
     } else if(y <= rb.y() && y >= rb.y() - PADDING) {
         // 下边
-        dir = BOTTOM;
-        this->setCursor(QCursor(Qt::SizeVerCursor));
+//        dir = BOTTOM;
+//        this->setCursor(QCursor(Qt::SizeVerCursor));
     } else {
         // 默认
         dir = NONE;

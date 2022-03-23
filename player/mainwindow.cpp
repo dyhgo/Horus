@@ -12,7 +12,6 @@ void MainWindow::setActionForButton() {
 void MainWindow::init() {
     for (int i = 0; i < 16; ++i) {
         Widget* widget = new Widget();
-
         widgets.push_back(widget);
     }
 
