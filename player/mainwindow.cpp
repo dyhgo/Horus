@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMenu>
+#include "ui_widget.h"
 
 void MainWindow::setActionForButton() {
     ui->btnOne->setDefaultAction(ui->actOne);
@@ -12,8 +13,10 @@ void MainWindow::setActionForButton() {
 void MainWindow::init() {
     for (int i = 0; i < 16; ++i) {
         Widget* widget = new Widget();
+        connect(widget, SIGNAL(btnClicked_widget_signal(QString)), this, SLOT(btnClicked_mainwindow_slot(QString)));
         widgets.push_back(widget);
     }
+
 
     ui->gridLayout->addWidget(widgets.at(0), 0, 0);
 
@@ -28,6 +31,9 @@ void MainWindow::init() {
     QTreeWidgetItem* item2 = new QTreeWidgetItem(ui->treeDevices);
     item2->setText(0, "设备2");
     ui->treeDevices->addTopLevelItem(item2);
+
+    map.insert("设备1", "rtmp://hls.hsrtv.cn/hls/hstv1");
+    map.insert("设备2", "rtmp://hls.hsrtv.cn/hls/hstv2");
 
 
 
@@ -106,4 +112,16 @@ void MainWindow::on_MainWindow_customContextMenuRequested(const QPoint& pos) {
     menu->addAction(ui->actSixteen);
     menu->exec(QCursor::pos());
     delete menu;
+}
+
+void MainWindow::btnClicked_mainwindow_slot(const QString& objName) {
+    Widget* widget = (Widget*) sender();
+    QTreeWidgetItem* item = ui->treeDevices->currentItem();
+    if (item == nullptr) return ;
+    if (objName == "btnFlowClose") {
+        widget->ui->playwidget->close();
+    } else if (objName == "btnFlowVideo") {
+        widget->ui->playwidget->setUrl(map[item->text(0)]);
+        widget->ui->playwidget->open();
+    }
 }

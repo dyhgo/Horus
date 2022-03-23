@@ -495,7 +495,9 @@ void FFmpegWidget::initFlowPanel() {
     for (int i = 0; i < btns.count(); i++) {
         QPushButton* btn = new QPushButton;
         //绑定按钮单击事件,用来发出信号通知
-        //connect(btn, SIGNAL(clicked(bool)), this, SLOT(btnClicked()));
+
+        connect(btn, SIGNAL(clicked(bool)), this, SLOT(btnClicked_ffmpeg_slot()));
+
         //设置标识,用来区别按钮
         btn->setObjectName(btns.at(i));
         //设置固定宽度
@@ -531,9 +533,10 @@ void FFmpegWidget::initFlowStyle() {
 
 
 
-//void FFmpegWidget::btnClicked() {
-
-//}
+void FFmpegWidget::btnClicked_ffmpeg_slot() {
+    QPushButton* btn = (QPushButton*) sender();
+    emit btnClicked_ffmpeg_signal(btn->objectName());
+}
 
 bool FFmpegWidget::getFlowEnable() const {
     return this->flowEnable;

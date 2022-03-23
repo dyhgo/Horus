@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include <QHash>
 #include "widget.h"
+#include "ffmpeg.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,10 +37,13 @@ class MainWindow : public QWidget {
 
     void on_MainWindow_customContextMenuRequested(const QPoint& pos);
 
+    void btnClicked_mainwindow_slot(const QString& objName);
+
   private:
     Ui::MainWindow* ui;
 
     QVector<Widget*> widgets;
+    QHash<QString, QString> map;
 };
 
 #endif // MAINWINDOW_H

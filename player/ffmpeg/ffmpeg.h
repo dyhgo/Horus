@@ -128,16 +128,23 @@ class FFmpegWidget : public QWidget {
 
     int borderWidth;                //边框宽度
 
+  signals:
+
+    void btnClicked_ffmpeg_signal(const QString& str);
+
   private slots:
 
     //处理按钮单击
-    //void btnClicked();
+    void btnClicked_ffmpeg_slot();
 
   public:
 
     bool getFlowEnable()            const;
     QColor getFlowBgColor()         const;
     QColor getFlowPressColor()      const;
+
+
+
 
   public slots:
 

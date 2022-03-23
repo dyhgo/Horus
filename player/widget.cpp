@@ -4,7 +4,11 @@
 Widget::Widget(QWidget* parent) :
     QWidget(parent),
     ui(new Ui::Widget) {
+
     ui->setupUi(this);
+
+    connect(ui->playwidget, SIGNAL(btnClicked_ffmpeg_signal(QString)), this, SLOT(btnClicked_widget_slot(QString)));
+
     QStringList urls;
     urls << "https://hls01open.ys7.com/openlive/6e0b2be040a943489ef0b9bb344b96b8.hd.m3u8";
     urls << "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
@@ -27,6 +31,10 @@ Widget::Widget(QWidget* parent) :
 
 Widget::~Widget() {
     delete ui;
+}
+
+void Widget::btnClicked_widget_slot(const QString& str) {
+    emit btnClicked_widget_signal(str);
 }
 
 void Widget::enterEvent(QEvent*) {

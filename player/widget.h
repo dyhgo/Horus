@@ -15,10 +15,14 @@ class Widget : public QWidget {
     explicit Widget(QWidget* parent = 0);
     ~Widget();
 
-  private slots:
-    //void on_btnOpen_clicked();
+  signals:
 
-  private:
+    void btnClicked_widget_signal(const QString& str);
+
+  private slots:
+    void btnClicked_widget_slot(const QString& str);
+
+  public:
     Ui::Widget* ui;
 
   protected:

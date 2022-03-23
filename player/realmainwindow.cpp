@@ -171,6 +171,8 @@ void RealMainWindow::region(const QPoint& cursorGlobalPoint) {
         dir = NONE;
         this->setCursor(QCursor(Qt::ArrowCursor));
     }
+
+
 }
 
 void RealMainWindow::init() {
