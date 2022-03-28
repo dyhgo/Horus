@@ -123,16 +123,16 @@
           <number>1</number>
          </property>
          <property name="leftMargin">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="rightMargin">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>1</number>
          </property>
          <item>
           <widget class="QToolButton" name="btnMonitor">
@@ -157,6 +157,19 @@
            </property>
            <property name="text">
             <string>视频回放界面</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="btnSettings">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>系统设置界面</string>
            </property>
           </widget>
          </item>

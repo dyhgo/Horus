@@ -31,20 +31,29 @@ SOURCES += \
     mainwindow.cpp \
     realmainwindow.cpp \
     playback.cpp \
-    appinit.cpp
+    appinit.cpp \
+    settings.cpp \
+    cameramanagement.cpp \
+    syssettings.cpp
 
 HEADERS += \
         widget.h \
     mainwindow.h \
     realmainwindow.h \
     playback.h \
-    appinit.h
+    appinit.h \
+    settings.h \
+    cameramanagement.h \
+    syssettings.h
 
 FORMS += \
     widget.ui \
     mainwindow.ui \
     realmainwindow.ui \
-    playback.ui
+    playback.ui \
+    settings.ui \
+    cameramanagement.ui \
+    syssettings.ui
 
 CONFIG += warn_off
 

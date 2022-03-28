@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "mainwindow.h"
 #include "playback.h"
+#include "settings.h"
 #include <QMouseEvent>
 #include <QPoint>
 #include <QCursor>

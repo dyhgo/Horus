@@ -223,6 +223,8 @@ void RealMainWindow::init() {
     ui->stackedWidget->addWidget(w);
     Playback* p = new Playback();
     ui->stackedWidget->addWidget(p);
+    Settings* s = new Settings();
+    ui->stackedWidget->addWidget(s);
     ui->btnMonitor->setChecked(true);
     ui->btnMonitor->click();
 }
@@ -260,5 +262,7 @@ void RealMainWindow::btnClicked() {
         ui->stackedWidget->setCurrentIndex(0);
     } else if (name == "视频回放界面") {
         ui->stackedWidget->setCurrentIndex(1);
+    } else if (name == "系统设置界面") {
+        ui->stackedWidget->setCurrentIndex(2);
     }
 }

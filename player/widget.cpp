@@ -7,6 +7,8 @@ Widget::Widget(QWidget* parent) :
 
     ui->setupUi(this);
 
+
+
     connect(ui->playwidget, SIGNAL(btnClicked_ffmpeg_signal(QString)), this, SLOT(btnClicked_widget_slot(QString)));
 
     QStringList urls;
