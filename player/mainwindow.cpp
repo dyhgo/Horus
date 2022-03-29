@@ -24,28 +24,27 @@ void MainWindow::init() {
 
 
 
-    ui->treeDevices->clear();
-    QTreeWidgetItem* item = new QTreeWidgetItem(ui->treeDevices);
-    item->setText(0, "设备1");
-    ui->treeDevices->addTopLevelItem(item);
-    QTreeWidgetItem* item2 = new QTreeWidgetItem(ui->treeDevices);
-    item2->setText(0, "设备2");
-    ui->treeDevices->addTopLevelItem(item2);
+//    ui->treeDevices->clear();
+//    QTreeWidgetItem* item = new QTreeWidgetItem(ui->treeDevices);
+//    item->setText(0, "设备1");
+//    ui->treeDevices->addTopLevelItem(item);
+//    QTreeWidgetItem* item2 = new QTreeWidgetItem(ui->treeDevices);
+//    item2->setText(0, "设备2");
+//    ui->treeDevices->addTopLevelItem(item2);
 
 
 
-    map.insert("设备1", "rtmp://hls.hsrtv.cn/hls/hstv1");
-    map.insert("设备2", "rtmp://hls.hsrtv.cn/hls/hstv2");
+
 
 
 
 }
 
-MainWindow::MainWindow(QWidget* parent) :
+MainWindow::MainWindow(RealMainWindow* w, QWidget* parent) :
     QWidget(parent),
-    ui(new Ui::MainWindow) {
+    ui(new Ui::MainWindow),
+    m_realmainwindow(w) {
     ui->setupUi(this);
-
     init();
 }
 
@@ -123,7 +122,7 @@ void MainWindow::btnClicked_mainwindow_slot(const QString& objName) {
     if (objName == "btnFlowClose") {
         widget->ui->playwidget->close();
     } else if (objName == "btnFlowVideo") {
-        widget->ui->playwidget->setUrl(map[item->text(0)]);
+        widget->ui->playwidget->setUrl(m_realmainwindow->map[item->text(0)]);
         widget->ui->playwidget->open();
     }
 }

@@ -1,14 +1,15 @@
 #include "settings.h"
 #include "ui_settings.h"
 
-Settings::Settings(QWidget* parent) :
+Settings::Settings(RealMainWindow* w, QWidget* parent) :
     QWidget(parent),
-    ui(new Ui::Settings) {
+    ui(new Ui::Settings),
+    m_realmainwindow(w) {
     ui->setupUi(this);
 
     btnsLeft << ui->btnSysSettings << ui->btnCameraManagement;
     ss = new SysSettings();
-    cm = new CameraManagement();
+    cm = new CameraManagement(w);
     foreach (QToolButton* btn, btnsLeft) {
         btn->setCheckable(true);
     }

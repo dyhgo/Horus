@@ -1,6 +1,7 @@
 #include "realmainwindow.h"
 #include "ui_realmainwindow.h"
 #include "mainwindow.h"
+#include "settings.h"
 #include <QTabWidget>
 
 
@@ -219,12 +220,13 @@ void RealMainWindow::init() {
     }
 
 
-    MainWindow* w = new MainWindow();
+    MainWindow* w = new MainWindow(this);
+    treeWidget = w->ui->treeDevices;
     //qDebug() << (w == nullptr);
     ui->stackedWidget->addWidget(w);
     Playback* p = new Playback();
     ui->stackedWidget->addWidget(p);
-    Settings* s = new Settings();
+    Settings* s = new Settings(this);
     ui->stackedWidget->addWidget(s);
     ui->btnMonitor->setChecked(true);
     ui->btnMonitor->click();

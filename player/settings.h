@@ -5,6 +5,7 @@
 #include "syssettings.h"
 #include "cameramanagement.h"
 #include <QToolButton>
+#include "realmainwindow.h"
 
 
 namespace Ui {
@@ -15,7 +16,7 @@ class Settings : public QWidget {
     Q_OBJECT
 
   public:
-    explicit Settings(QWidget* parent = 0);
+    explicit Settings(RealMainWindow* w, QWidget* parent = 0);
     ~Settings();
 
   private slots:
@@ -29,6 +30,8 @@ class Settings : public QWidget {
     QList<QToolButton*> btnsLeft;
     SysSettings* ss;
     CameraManagement* cm;
+
+    RealMainWindow* m_realmainwindow;
 };
 
 #endif // SETTINGS_H

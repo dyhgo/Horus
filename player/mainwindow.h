@@ -20,7 +20,7 @@ class MainWindow : public QWidget {
     void init();
 
   public:
-    explicit MainWindow(QWidget* parent = 0);
+    explicit MainWindow(RealMainWindow* w, QWidget* parent = 0);
     ~MainWindow();
 
     void hide_all_videos();
@@ -40,11 +40,14 @@ class MainWindow : public QWidget {
 
     void btnClicked_mainwindow_slot(const QString& objName);
 
-  private:
+  public:
     Ui::MainWindow* ui;
 
     QVector<Widget*> widgets;
-    QHash<QString, QString> map;
+
+    RealMainWindow* m_realmainwindow;
+
+
 };
 
 #endif // MAINWINDOW_H

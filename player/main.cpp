@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QTextCodec>
 #include "realmainwindow.h"
+#include "mainwindow.h"
 #include "appinit.h"
 
 

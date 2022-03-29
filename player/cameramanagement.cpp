@@ -1,9 +1,10 @@
 #include "cameramanagement.h"
 #include "ui_cameramanagement.h"
 
-CameraManagement::CameraManagement(QWidget* parent) :
+CameraManagement::CameraManagement(RealMainWindow* w, QWidget* parent) :
     QWidget(parent),
-    ui(new Ui::CameraManagement) {
+    ui(new Ui::CameraManagement),
+    m_realmainwindow(w) {
     ui->setupUi(this);
 
     ui->tableInfo->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
@@ -38,6 +39,8 @@ void CameraManagement::initTable() {
     ui->btnSave->click();
 }
 
+
+
 void CameraManagement::appendInfo(QString deviceName, QString url) {
     int rowCount = ui->tableInfo->rowCount();
     ui->tableInfo->insertRow(rowCount);
@@ -47,6 +50,68 @@ void CameraManagement::appendInfo(QString deviceName, QString url) {
     ui->tableInfo->setItem(rowCount, 1, item);
 }
 
-void CameraManagement::on_btnSave_clicked() {
+void CameraManagement::clearEmptyRow() {
+    QTableWidgetItem* item;
+    for (int i = 0; i < ui->tableInfo->rowCount(); i++) {
+        bool allEmpty = true;
+        for (int j = 0; j < ui->tableInfo->columnCount(); j++) {
+            item = ui->tableInfo->item(i, j);
+            if (!(item == nullptr or item->text().isEmpty())) {
+                allEmpty = false;
+                break;
+            }
+        }
+        if (allEmpty) {
+            ui->tableInfo->removeRow(i);
+            i--;
+        }
+    }
+}
 
+bool CameraManagement::existEmptyCell() {
+    QTableWidgetItem* item;
+    for (int i = 0; i < ui->tableInfo->rowCount(); i++) {
+        for (int j = 0; j < ui->tableInfo->columnCount(); j++) {
+            item = ui->tableInfo->item(i, j);
+            if (item == nullptr or item->text().isEmpty()) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool CameraManagement::existDuplicateDevice() {
+    QSet<QString> set;
+    for (int i = 0; i < ui->tableInfo->rowCount(); i++) {
+        set.insert(ui->tableInfo->item(i, 0)->text());
+    }
+    return set.size() < ui->tableInfo->rowCount();
+}
+
+void CameraManagement::saveInfo() {
+    m_realmainwindow->map.clear();
+    m_realmainwindow->treeWidget->clear();
+    QTreeWidgetItem* item;
+    for (int i = 0; i < ui->tableInfo->rowCount(); i++) {
+        QTableWidgetItem* item1, *item2;
+        item1 = ui->tableInfo->item(i, 0);
+        item2 = ui->tableInfo->item(i, 1);
+        m_realmainwindow->map.insert(item1->text(), item2->text());
+        item = new QTreeWidgetItem(m_realmainwindow->treeWidget);
+        item->setText(0, item1->text());
+        m_realmainwindow->treeWidget->addTopLevelItem(item);
+    }
+}
+
+
+
+void CameraManagement::on_btnSave_clicked() {
+    if (existEmptyCell()) {
+        QMessageBox::critical(this, "摄像头管理 - 错误", "存在空项，无法保存");
+    } else if (existDuplicateDevice()) {
+        QMessageBox::critical(this, "摄像头管理 - 错误", "存在同名设备，无法保存");
+    } else {
+        saveInfo();
+    }
 }

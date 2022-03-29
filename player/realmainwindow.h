@@ -2,15 +2,20 @@
 #define REALMAINWINDOW_H
 
 #include <QWidget>
-#include "mainwindow.h"
+//#include "mainwindow.h"
 #include "playback.h"
-#include "settings.h"
+//#include "settings.h"
 #include <QMouseEvent>
 #include <QPoint>
 #include <QCursor>
 #include <QRect>
 #include <QDebug>
 #include <iostream>
+#include <QHash>
+#include <QTreeWidget>
+#include <ui_mainwindow.h>
+
+
 #define PADDING 2
 
 namespace Ui {
@@ -68,8 +73,11 @@ class RealMainWindow : public QWidget {
   private:
     Ui::RealMainWindow* ui;
 
-//  public:
-//    QHash<QString, QString> map;
+
+  public:
+    QHash<QString, QString> map;
+    QTreeWidget* treeWidget;
+
 };
 
 #endif // REALMAINWINDOW_H
