@@ -32,6 +32,8 @@ void MainWindow::init() {
     item2->setText(0, "设备2");
     ui->treeDevices->addTopLevelItem(item2);
 
+
+
     map.insert("设备1", "rtmp://hls.hsrtv.cn/hls/hstv1");
     map.insert("设备2", "rtmp://hls.hsrtv.cn/hls/hstv2");
 

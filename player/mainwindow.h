@@ -5,6 +5,7 @@
 #include <QHash>
 #include "widget.h"
 #include "ffmpeg.h"
+#include "realmainwindow.h"
 
 namespace Ui {
 class MainWindow;

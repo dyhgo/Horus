@@ -218,6 +218,7 @@ void RealMainWindow::init() {
         connect(btn, SIGNAL(clicked()), this, SLOT(btnClicked()));
     }
 
+
     MainWindow* w = new MainWindow();
     //qDebug() << (w == nullptr);
     ui->stackedWidget->addWidget(w);

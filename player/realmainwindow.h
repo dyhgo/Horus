@@ -67,6 +67,9 @@ class RealMainWindow : public QWidget {
 
   private:
     Ui::RealMainWindow* ui;
+
+//  public:
+//    QHash<QString, QString> map;
 };
 
 #endif // REALMAINWINDOW_H
