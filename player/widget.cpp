@@ -40,7 +40,7 @@ void Widget::btnClicked_widget_slot(const QString& str) {
 }
 
 void Widget::enterEvent(QEvent*) {
-    ui->frame->setStyleSheet("border:1px solid blue");
+    ui->frame->setStyleSheet("border:1px solid pink");
 }
 
 void Widget::leaveEvent(QEvent*) {
