@@ -5,6 +5,7 @@
 #include "realmainwindow.h"
 #include "mainwindow.h"
 #include "appinit.h"
+#include <QFile>
 
 
 int main(int argc, char* argv[]) {
@@ -44,10 +45,15 @@ int main(int argc, char* argv[]) {
 //    w.show();
 
 
-
+    QFile file("test1.qss");
+    file.open(QIODevice::ReadOnly);
+    QString styleSheet = QString::fromLatin1(file.readAll());
+    a.setStyleSheet(styleSheet);
+    file.close();
     RealMainWindow w;
     w.resize(1400, 900);
     w.show();
+
 
     return a.exec();
 }

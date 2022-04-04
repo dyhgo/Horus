@@ -40,6 +40,7 @@ void MainWindow::init() {
 
 }
 
+
 MainWindow::MainWindow(RealMainWindow* w, QWidget* parent) :
     QWidget(parent),
     ui(new Ui::MainWindow),

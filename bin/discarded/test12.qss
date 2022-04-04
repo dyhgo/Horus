@@ -1,0 +1,219 @@
+
+QToolTip
+{
+    border: 1px solid #76797C;
+    background-color: rgb(90, 102, 117);;
+    color: #D3DAE3;
+    padding: 5px;
+    opacity: 200;
+}
+
+
+QWidget {
+    background-color: #444a58;
+}
+
+QWidget:disabled
+{
+    color: #888888;
+    background-color: #3d424e;
+}
+
+QWidget:item:hover
+{
+    background-color: #5294e2;
+    color: #D3DAE3;
+}
+
+QWidget:item:selected
+{
+    background-color: #5294e2;
+}
+
+QCheckBox
+{
+    spacing: 5px;
+    outline: none;
+    color: #D3DAE3;
+}
+
+QGroupBox::indicator
+{
+    margin-left: 2px;
+}
+
+QCheckBox::indicator:checked,
+QGroupBox::indicator:checked {
+    image: url("assets/dark-assets/checkbox/checkbox-checked-dark.png");
+}
+
+QCheckBox::indicator:unchecked,
+QGroupBox::indicator:unchecked {
+    image: url("assets/dark-assets/checkbox/checkbox-unchecked-dark.png");
+}
+
+QCalendarWidget QAbstractItemView {
+    background-color: #444a58;
+    color: #D3DAE3;
+}
+
+QCalendarWidget::HorizontalHeader {
+    background-color: #444a58;
+}
+
+QFrame {
+    background-color: #444a58;
+    border: none;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #495364;
+    selection-background-color: #5294e2;
+    color: #D3DAE3;
+    padding: 3px 3px;
+}
+
+QComboBox::drop-down {
+    border: 1px solid #495364;
+}
+
+QComboBox::down-arrow {
+    image: url("assets/common-assets/misc/ws-switch-arrow-down.png");
+}
+
+QComboBox::up-arrow {
+    image: url("assets/common-assets/misc/ws-switch-arrow-up.png");
+}
+
+QHeaderView::section {
+    background-color: #3d424e;
+    border: 0.5px solid #3d424e;
+    padding: 3px 3px;
+}
+
+QProgressBar {
+    color: #D3DAE3;
+}
+
+QProgressBar:horizontal {
+    border: 1px solid #495364;
+    border-radius: 3px;
+    background: #444a58;
+    padding: 1px;
+}
+
+QProgressBar::chunk:horizontal {
+    background-color: #5294e2;
+    /* background: qlineargradient(x1: 0, y1: 0.5, x2: 1, y2: 0.5, stop: 0 #5294e2, stop: 1 #444a58 ); */
+}
+
+QPushButton {
+    font-family: Futura Bk bt, sans, Sans-Serif;
+    font-size: 9pt;
+    background-color: #495364;
+    color: #D3DAE3;
+    padding: 5px 32px;
+    text-shadow: 0 1px rgba(64, 69, 82, 0);
+    border: 0.5px solid rgba(102, 109, 132, 0.35);
+    border-radius: 3px;
+    box-shadow: inset 0 2px 4px rgba(68, 74, 88, 0.05);
+}
+
+QPushButton:disabled {
+    background-color: #495364;
+    color: rgb(133, 133, 133);
+}
+
+QPushButton:hover {
+    background-color: #525d70;
+}
+
+QRadioButton::indicator:checked {
+    border: none;
+    outline: none;
+    image: url("assets/dark-assets/radio/radio-checked-dark.png");
+}
+
+QRadioButton::indicator:unchecked {
+    border: none;
+    outline: none;
+    image: url("assets/dark-assets/radio/radio-unchecked-dark.png");
+}
+
+QScrollBar {
+    background-color: #444a58;
+}
+
+QScrollBar:horizontal {
+    height: 12px;
+    min-width: 20px;
+}
+
+QScrollBar:vertical {
+    width: 12px;
+    min-height:20px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+    background-color: #5294e2;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background-color: none;
+}
+
+QScrollBar:down-arrow:vertical {
+    image: url("assets/common-assets/misc/ws-switch-arrow-down.png");
+}
+
+QScrollBar::up-arrow:vertical {
+    image: url("assets/common-assets/misc/ws-switch-arrow-up.png");
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background-color: none;
+}
+
+QSlider::handle:horizontal {
+    background-color: #5294e2;
+    width: 18px;
+    border: 1px solid #5294e2;
+    border-radius: 3px;
+}
+QSpinBox::up-button {
+    image: url("assets/common-assets/misc/ws-switch-arrow-up.png");
+}
+
+QSpinBox::down-button {
+    image: url("assets/common-assets/misc/ws-switch-arrow-down.png");
+}
+
+
+/* Shared Style */
+QCheckBox, QLabel, QRadioButton{
+    color: #D3DAE3;
+}
+
+QDialog, QDockWidget, QMainWindow, QToolTip {
+    background-color: #444a58;
+    color: #D3DAE3;
+    border: 1px solid #3d424e;
+}
+
+QComboBox, QLineEdit, QSpinBox, QTextEdit {
+    background-color: #495364;
+    color: #D3DAE3;
+    padding: 3px 3px;
+    border: 0.5px solid #495364;
+    border-radius:3px;
+}
+
+QListWidget, QTableWidget, QTreeWidget, QHeaderView {
+    background-color: #495364;
+    color: #D3DAE3;
+    alternate-background-color: #444a58;
+    border: 0.5px solid #495364;
+    border-radius:3px;
+}
