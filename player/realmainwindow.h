@@ -13,7 +13,7 @@
 #include <iostream>
 #include <QHash>
 #include <QTreeWidget>
-#include <ui_mainwindow.h>
+
 
 
 #define PADDING 2
@@ -45,6 +45,7 @@ class RealMainWindow : public QWidget {
 
     void region(const QPoint& cursorGlobalPoint);
     void init();
+    void iconSet();
 
   protected:
 

@@ -10,6 +10,7 @@
 #include "qmimedata.h"
 #include "qurl.h"
 #include "qdebug.h"
+#include <iostream>
 
 FFmpegThread::FFmpegThread(QObject* parent) : QThread(parent) {
     setObjectName("FFmpegThread");
@@ -469,13 +470,15 @@ void FFmpegWidget::initFlowPanel() {
     icons << QApplication::style()->standardIcon(QStyle::SP_DialogCancelButton);
 #else
     QList<int> icons;
-    icons << 0xe68d << 0xe672 << 0xe674 << 0xea36 << 0xe74c;
+    icons << 0xe61f << 0xe609 << 0xe615 << 0xea36 << 0xe74c;
 
     //判断图形字体是否存在,不存在则加入
     QFont iconFont;
     QFontDatabase fontDb;
+    fontDb.removeAllApplicationFonts();
     if (!fontDb.families().contains("iconfont")) {
         int fontId = fontDb.addApplicationFont(":/res/font/iconfont.ttf");
+        //std::cout << fontId << '\n';
         QStringList fontName = fontDb.applicationFontFamilies(fontId);
         if (fontName.count() == 0) {
             qDebug() << "load iconfont.ttf error";

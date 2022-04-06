@@ -2,15 +2,32 @@
 #include "ui_mainwindow.h"
 #include <QMenu>
 #include "ui_widget.h"
+#include "iconhelper.h"
+#include <QAbstractButton>
+#include <iostream>
+
 
 void MainWindow::setActionForButton() {
     ui->btnOne->setDefaultAction(ui->actOne);
+    ui->btnOne->setText("");
     ui->btnFour->setDefaultAction(ui->actFour);
+    ui->btnFour->setText("");
     ui->btnNine->setDefaultAction(ui->actNine);
+    ui->btnNine->setText("");
     ui->btnSixteen->setDefaultAction(ui->actSixteen);
+    ui->btnSixteen->setText("");
 }
 
 void MainWindow::init() {
+
+    QList<QToolButton*> btns = ui->widgetMulti->findChildren<QToolButton*>();
+
+    foreach (QToolButton* btn, btns) {
+        btn->setCheckable(true);
+    }
+
+
+
     for (int i = 0; i < 16; ++i) {
         Widget* widget = new Widget();
         connect(widget, SIGNAL(btnClicked_widget_signal(QString)), this, SLOT(btnClicked_mainwindow_slot(QString)));
@@ -34,10 +51,20 @@ void MainWindow::init() {
 
 
 
+    ui->btnOne->setChecked(true);
+    ui->actOne->trigger();  // 写在前面会数组越界，因为先调用act_one_triggered()，里面remove qwidget，但是还没有创建qwidget
+    //ui->btnOne->click();
 
 
 
+}
 
+void MainWindow::btnCheckSet(QToolButton* cnt) {
+    QList<QToolButton*> btns = ui->widgetMulti->findChildren<QToolButton*>();
+
+    foreach (QToolButton* btn, btns) {
+        btn->setChecked(btn == cnt);
+    }
 }
 
 
@@ -66,6 +93,7 @@ void MainWindow::on_actOne_triggered() {
     for (int i = 0; i < 1; ++i) {
         widgets.at(i)->setVisible(true);
     }
+    btnCheckSet(ui->btnOne);
 }
 
 void MainWindow::on_actFour_triggered() {
@@ -79,6 +107,7 @@ void MainWindow::on_actFour_triggered() {
     for (int i = 0; i < 4; ++i) {
         widgets.at(i)->setVisible(true);
     }
+    btnCheckSet(ui->btnFour);
 }
 
 void MainWindow::on_actNine_triggered() {
@@ -91,6 +120,7 @@ void MainWindow::on_actNine_triggered() {
     for (int i = 0; i < 9; ++i) {
         widgets.at(i)->setVisible(true);
     }
+    btnCheckSet(ui->btnNine);
 }
 
 void MainWindow::on_actSixteen_triggered() {
@@ -103,6 +133,7 @@ void MainWindow::on_actSixteen_triggered() {
     for (int i = 0; i < 16; ++i) {
         widgets.at(i)->setVisible(true);
     }
+    btnCheckSet(ui->btnSixteen);
 }
 
 void MainWindow::on_MainWindow_customContextMenuRequested(const QPoint& pos) {
@@ -127,3 +158,19 @@ void MainWindow::btnClicked_mainwindow_slot(const QString& objName) {
         widget->ui->playwidget->open();
     }
 }
+
+//void MainWindow::on_btnOne_clicked() {
+//    btnCheckSet(ui->btnOne);
+//}
+
+//void MainWindow::on_btnFour_clicked() {
+//    btnCheckSet(ui->btnFour);
+//}
+
+//void MainWindow::on_btnNine_clicked() {
+//    btnCheckSet(ui->btnNine);
+//}
+
+//void MainWindow::on_btnSixteen_clicked() {
+//    btnCheckSet(ui->btnSixteen);
+//}

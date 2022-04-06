@@ -18,6 +18,7 @@ class MainWindow : public QWidget {
 
     void setActionForButton();
     void init();
+    void btnCheckSet(QToolButton*);
 
   public:
     explicit MainWindow(RealMainWindow* w, QWidget* parent = 0);
@@ -39,6 +40,14 @@ class MainWindow : public QWidget {
     void on_MainWindow_customContextMenuRequested(const QPoint& pos);
 
     void btnClicked_mainwindow_slot(const QString& objName);
+
+//    void on_btnOne_clicked();
+
+//    void on_btnFour_clicked();
+
+//    void on_btnNine_clicked();
+
+//    void on_btnSixteen_clicked();
 
   public:
     Ui::MainWindow* ui;

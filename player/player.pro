@@ -34,7 +34,8 @@ SOURCES += \
     appinit.cpp \
     settings.cpp \
     cameramanagement.cpp \
-    syssettings.cpp
+    syssettings.cpp \
+    iconhelper.cpp
 
 HEADERS += \
         widget.h \
@@ -44,7 +45,8 @@ HEADERS += \
     appinit.h \
     settings.h \
     cameramanagement.h \
-    syssettings.h
+    syssettings.h \
+    iconhelper.h
 
 FORMS += \
     widget.ui \

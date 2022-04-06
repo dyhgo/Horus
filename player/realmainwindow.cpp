@@ -3,6 +3,10 @@
 #include "mainwindow.h"
 #include "settings.h"
 #include <QTabWidget>
+#include <iostream>
+#include <ui_mainwindow.h>
+
+#include "iconhelper.h"
 
 
 RealMainWindow::RealMainWindow(QWidget* parent) :
@@ -178,6 +182,11 @@ void RealMainWindow::region(const QPoint& cursorGlobalPoint) {
 
 void RealMainWindow::init() {
 
+    iconSet();
+
+
+
+// ======================================================================
 
 
     ui->widgetTitle->installEventFilter(this);
@@ -193,10 +202,10 @@ void RealMainWindow::init() {
     this->setProperty("resizable", true);
 
 
-    QPixmap pic;
-    pic.load(":/res/images/camera.png");
-    pic = pic.scaled(67, 70);
-    ui->labIcon->setPixmap(pic);
+//    QPixmap pic;
+//    pic.load(":/res/images/camera.png");
+//    pic = pic.scaled(67, 70);
+//    ui->labIcon->setPixmap(pic);
 
     QFont font;
     font.setPixelSize(30);
@@ -232,6 +241,22 @@ void RealMainWindow::init() {
     ui->btnMonitor->click();
 }
 
+void RealMainWindow::iconSet() {
+    IconHelper();
+    IconHelper::setIcon(ui->btnClose, QString(), 0xeb6a, 15);
+    IconHelper::setIcon(ui->btnMaximize, QString(), 0xe60d, 15);
+    IconHelper::setIcon(ui->btnMinimize, QString(), 0xe60e, 15);
+
+    IconHelper::setIcon(ui->btnMonitor, QColor("white"), 0xe61f, 36);
+    ui->btnMonitor->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    IconHelper::setIcon(ui->btnPlayback, QColor("white"), 0xe600, 36);
+    ui->btnPlayback->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    IconHelper::setIcon(ui->btnSettings, QColor("white"), 0xe65c, 36);
+    ui->btnSettings->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    IconHelper::setIcon(ui->labIcon, QString(), 0xe7cc, 67);
+}
+
 void RealMainWindow::on_btnClose_clicked() {
     close();
 }
@@ -261,11 +286,11 @@ void RealMainWindow::btnClicked() {
     foreach (QToolButton* btn, btns) {
         btn->setChecked(btn == b);
     }
-    if (name == "视频监控界面") {
+    if (name == "视 频 监 控") {
         ui->stackedWidget->setCurrentIndex(0);
-    } else if (name == "视频回放界面") {
+    } else if (name == "视 频 回 放") {
         ui->stackedWidget->setCurrentIndex(1);
-    } else if (name == "系统设置界面") {
+    } else if (name == "系 统 设 置") {
         ui->stackedWidget->setCurrentIndex(2);
     }
 }

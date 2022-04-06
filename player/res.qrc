@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/res">
-        <file>images/camera.png</file>
-        <file>font/iconfont.ttf</file>
         <file>images/QDarkStyleSheet/.keep</file>
         <file>images/QDarkStyleSheet/arrow_down.png</file>
         <file>images/QDarkStyleSheet/arrow_down@2x.png</file>
@@ -211,5 +209,18 @@
         <file>images/QDarkStyleSheet/window_undock_focus@2x.png</file>
         <file>images/QDarkStyleSheet/window_undock_pressed.png</file>
         <file>images/QDarkStyleSheet/window_undock_pressed@2x.png</file>
+        <file>font/iconfont.ttf</file>
+        <file>images/QDarkStyleSheet/通用类_九画面.png</file>
+        <file>images/QDarkStyleSheet/通用类_九画面.svg</file>
+        <file>images/QDarkStyleSheet/通用类_十六画面.png</file>
+        <file>images/QDarkStyleSheet/通用类_十六画面.svg</file>
+        <file>images/QDarkStyleSheet/通用类_四画面.png</file>
+        <file>images/QDarkStyleSheet/通用类_四画面.svg</file>
+        <file>images/QDarkStyleSheet/通用类_一画面.png</file>
+        <file>images/QDarkStyleSheet/通用类_一画面.svg</file>
+        <file>images/QDarkStyleSheet/通用类_九画面 (1).png</file>
+        <file>images/QDarkStyleSheet/通用类_十六画面 (1).png</file>
+        <file>images/QDarkStyleSheet/通用类_四画面 (1).png</file>
+        <file>images/QDarkStyleSheet/通用类_一画面 (1).png</file>
     </qresource>
 </RCC>
