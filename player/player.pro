@@ -35,7 +35,8 @@ SOURCES += \
     settings.cpp \
     cameramanagement.cpp \
     syssettings.cpp \
-    iconhelper.cpp
+    iconhelper.cpp \
+    yolov5.cpp
 
 HEADERS += \
         widget.h \
@@ -46,7 +47,8 @@ HEADERS += \
     settings.h \
     cameramanagement.h \
     syssettings.h \
-    iconhelper.h
+    iconhelper.h \
+    yolov5.h
 
 FORMS += \
     widget.ui \
@@ -64,3 +66,12 @@ include ($$PWD/ffmpeg/ffmpeg.pri)
 
 RESOURCES += \
     res.qrc
+
+
+    INCLUDEPATH += D:\opencv\build\install\include\
+                   D:\opencv\build\install\include\opencv2
+
+
+
+
+

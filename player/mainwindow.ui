@@ -185,9 +185,8 @@
   </layout>
   <action name="actOne">
    <property name="icon">
-    <iconset>
-     <normalon>:/res/images/QDarkStyleSheet/通用类_一画面 (1).png</normalon>
-    </iconset>
+    <iconset resource="res.qrc">
+     <normaloff>:/res/images/QDarkStyleSheet/z_one.png</normaloff>:/res/images/QDarkStyleSheet/z_one.png</iconset>
    </property>
    <property name="text">
     <string>1画面</string>
@@ -202,8 +201,7 @@
   <action name="actFour">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/res/images/QDarkStyleSheet/通用类_四画面 (1).png</normaloff>
-     <normalon>:/res/images/QDarkStyleSheet/通用类_一画面 (1).png</normalon>:/res/images/QDarkStyleSheet/通用类_四画面 (1).png</iconset>
+     <normaloff>:/res/images/QDarkStyleSheet/z_four.png</normaloff>:/res/images/QDarkStyleSheet/z_four.png</iconset>
    </property>
    <property name="text">
     <string>4画面</string>
@@ -217,9 +215,8 @@
   </action>
   <action name="actNine">
    <property name="icon">
-    <iconset>
-     <normalon>:/res/images/QDarkStyleSheet/通用类_九画面 (1).png</normalon>
-    </iconset>
+    <iconset resource="res.qrc">
+     <normaloff>:/res/images/QDarkStyleSheet/z_nine.png</normaloff>:/res/images/QDarkStyleSheet/z_nine.png</iconset>
    </property>
    <property name="text">
     <string>9画面</string>
@@ -233,9 +230,8 @@
   </action>
   <action name="actSixteen">
    <property name="icon">
-    <iconset>
-     <normalon>:/res/images/QDarkStyleSheet/通用类_十六画面 (1).png</normalon>
-    </iconset>
+    <iconset resource="res.qrc">
+     <normaloff>:/res/images/QDarkStyleSheet/z_sixteen.png</normaloff>:/res/images/QDarkStyleSheet/z_sixteen.png</iconset>
    </property>
    <property name="text">
     <string>16画面</string>
