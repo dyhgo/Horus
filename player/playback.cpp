@@ -1,8 +1,10 @@
 ﻿#include "playback.h"
 #include "ui_playback.h"
 #include <qtextcodec.h>
-
-
+#include <QListWidget>
+#include <QAbstractButton>
+#include <QDialogButtonBox>
+#include <iostream>
 
 
 Playback::Playback(QWidget* parent) :
@@ -17,6 +19,8 @@ Playback::Playback(QWidget* parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(readFrame()));
     ui->startDetect->setEnabled(false);
     ui->stopDetect->setEnabled(false);
+    ui->selectDevice->setEnabled(false);
+    ui->openFile->setEnabled(false);
     init();
 }
 
@@ -67,45 +71,115 @@ void Playback::readFrame() {
 }
 
 
+void Playback::initSelectDeviceDialog(QDialog* dialog) {
 
-
+    dialog->setWindowTitle("选择设备");
+    listWidget = new QListWidget(this);
+    QDialogButtonBox* box = new QDialogButtonBox(dialog);
+    QPushButton* btn = new QPushButton("确定");
+    //btn->setDefault(true);
+    //btn->setAutoDefault(false);
+    btn->setFixedSize(150, 40);
+    box->addButton(btn, QDialogButtonBox::YesRole);
+    QHBoxLayout* layout = new QHBoxLayout();
+    layout->addWidget(listWidget);
+    layout->addWidget(box);
+    dialog->setLayout(layout);
+    //dialog->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    //dialog->setWindowFlags(Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+    dialog->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+    dialog->setFixedSize(300, 300);
+    connect(box, SIGNAL(accepted()), dialog, SLOT(accept()));
+}
 
 
 
 void Playback::on_selectDevice_clicked() {
-    // TODO 判断是否已加载模型
-
-    std::string str = "rtmp://10.196.80.19:1935/record/DJI_1.MP4";
-    capture->open(str);
-    ui->lab_msg->setText(QString::fromStdString(str));
-
-    if (!capture->isOpened()) {
-        ui->textEditlog->appendPlainText("fail to open MP4!\n");
-        return;
+    //qDebug() << rmw->map.count() << '\n';
+    // 模态显示
+    if (dialog == nullptr) {
+        dialog = new QDialog(this);
+        initSelectDeviceDialog(dialog);
     }
-    //IsDetect_ok += 1;
-//        if (IsDetect_ok == 2)
-//            ui->startDetect->setEnabled(true);
 
-    ui->startDetect->setEnabled(true);
-    ui->textEditlog->appendPlainText(QString("Open video: %1 succesfully!").arg(QString::fromStdString(str)));
 
-    //获取整个帧数QStringLiteral
-    long totalFrame = capture->get(cv::CAP_PROP_FRAME_COUNT);
-    int width = capture->get(cv::CAP_PROP_FRAME_WIDTH);
-    int height = capture->get(cv::CAP_PROP_FRAME_HEIGHT);
-    ui->textEditlog->appendPlainText(QString("整个视频共 %1 帧, 宽=%2 高=%3 ").arg(totalFrame).arg(width).arg(height));
-    //ui->lab_video->resize(QSize(width, height));
 
-    //设置开始帧()
-    long frameToStart = 0;
-    capture->set(cv::CAP_PROP_POS_FRAMES, frameToStart);
-    ui->textEditlog->appendPlainText(QString("从第 %1 帧开始读").arg(frameToStart));
+    listWidget->clear();
+    foreach(const QString& str, rmw->map.keys()) {
+        QListWidgetItem* item = new QListWidgetItem();  // 这句话不能放在循环外，否则只有一个
+        item->setData(Qt::DisplayRole, str);
+        listWidget->addItem(item);
+    }
+    listWidget->sortItems();
+    int ret = dialog->exec();
+    if (ret == QDialog::Accepted) {
+        QListWidgetItem* item = listWidget->currentItem();
+        if (item == nullptr || item->text().isEmpty()) {
+            return ;
+        }
+        std::string url = rmw->map[item->text()].toStdString();
+        capture->open(url);
+        ui->lab_msg->setText(QString::fromStdString(url));
+        if (!capture->isOpened()) {
+            ui->textEditlog->appendPlainText("fail to open MP4!\n");
+            return;
+        }
+        ui->openFile->setEnabled(false);
+        ui->loadFile->setEnabled(false);
+        ui->startDetect->setEnabled(true);
+        ui->textEditlog->appendPlainText(QString("Open video: %1 succesfully!").arg(QString::fromStdString(url)));
+        //获取整个帧数QStringLiteral
+        long totalFrame = capture->get(cv::CAP_PROP_FRAME_COUNT);
+        int width = capture->get(cv::CAP_PROP_FRAME_WIDTH);
+        int height = capture->get(cv::CAP_PROP_FRAME_HEIGHT);
+        ui->textEditlog->appendPlainText(QString("整个视频共 %1 帧, 宽=%2 高=%3 ").arg(totalFrame).arg(width).arg(height));
+        //ui->lab_video->resize(QSize(width, height));
 
-    //获取帧率
-    double rate = capture->get(cv::CAP_PROP_FPS);
-    ui->textEditlog->appendPlainText(QString("帧率为: %1 ").arg(rate));
+        //设置开始帧()
+        long frameToStart = 0;
+        capture->set(cv::CAP_PROP_POS_FRAMES, frameToStart);
+        ui->textEditlog->appendPlainText(QString("从第 %1 帧开始读").arg(frameToStart));
 
+        //获取帧率
+        double rate = capture->get(cv::CAP_PROP_FPS);
+        ui->textEditlog->appendPlainText(QString("帧率为: %1 ").arg(rate));
+    }
+
+
+
+    /*
+
+        std::string str = "rtmp://10.196.80.19:1935/record/DJI_1.MP4";
+        capture->open(str);
+        ui->lab_msg->setText(QString::fromStdString(str));
+
+        if (!capture->isOpened()) {
+            ui->textEditlog->appendPlainText("fail to open MP4!\n");
+            return;
+        }
+        //IsDetect_ok += 1;
+    //        if (IsDetect_ok == 2)
+    //            ui->startDetect->setEnabled(true);
+
+        ui->startDetect->setEnabled(true);
+        ui->textEditlog->appendPlainText(QString("Open video: %1 succesfully!").arg(QString::fromStdString(str)));
+
+        //获取整个帧数QStringLiteral
+        long totalFrame = capture->get(cv::CAP_PROP_FRAME_COUNT);
+        int width = capture->get(cv::CAP_PROP_FRAME_WIDTH);
+        int height = capture->get(cv::CAP_PROP_FRAME_HEIGHT);
+        ui->textEditlog->appendPlainText(QString("整个视频共 %1 帧, 宽=%2 高=%3 ").arg(totalFrame).arg(width).arg(height));
+        //ui->lab_video->resize(QSize(width, height));
+
+        //设置开始帧()
+        long frameToStart = 0;
+        capture->set(cv::CAP_PROP_POS_FRAMES, frameToStart);
+        ui->textEditlog->appendPlainText(QString("从第 %1 帧开始读").arg(frameToStart));
+
+        //获取帧率
+        double rate = capture->get(cv::CAP_PROP_FPS);
+        ui->textEditlog->appendPlainText(QString("帧率为: %1 ").arg(rate));
+    */
 }
 
 void Playback::on_openFile_clicked() {
@@ -124,6 +198,10 @@ void Playback::on_openFile_clicked() {
             ui->lab_msg->setText("图像不存在！");
             return;
         }
+
+        ui->selectDevice->setEnabled(false);
+        ui->startDetect->setEnabled(true);
+
         cv::Mat temp;
         if(src.channels() == 4)
             cv::cvtColor(src, temp, cv::COLOR_BGRA2RGB);
@@ -155,6 +233,7 @@ void Playback::on_openFile_clicked() {
         //IsDetect_ok += 1;
 //        if (IsDetect_ok == 2)
 //            ui->startDetect->setEnabled(true);
+
         ui->selectDevice->setEnabled(false);
         ui->startDetect->setEnabled(true);
         ui->textEditlog->appendPlainText(QString::fromUtf8("Open video: %1 succesfully!").arg(filename));
@@ -188,6 +267,9 @@ void Playback::on_loadFile_clicked() {
         return;
     }
     //IsDetect_ok += 1;
+    ui->openFile->setEnabled(true);
+    ui->selectDevice->setEnabled(true);
+    ui->loadFile->setEnabled(false);
     ui->textEditlog->appendPlainText(QString::fromUtf8("Open onnxFile: %1 succesfully!").arg(onnxFile));
 //    if (IsDetect_ok == 2)
 //        ui->startDetect->setEnabled(true);
@@ -236,20 +318,20 @@ void Playback::on_stopDetect_clicked() {
     ui->startDetect->setEnabled(true);
     ui->stopDetect->setEnabled(false);
     timer->stop();
-    ui->textEditlog->appendPlainText(QString("===============\n"
+    ui->textEditlog->appendPlainText(QString("==============\n"
                                      "    停止检测\n"
-                                     "===============\n"));
+                                     "==============\n"));
 }
 
 void Playback::on_reset_clicked() {
     ui->stopDetect->click();
     ui->textEditlog->clear();
-    QList<QPushButton*> btns = ui->widget->findChildren<QPushButton*>();
-    foreach (QPushButton* btn, btns) {
-        btn->setEnabled(true);
-    }
-    ui->selectDevice->setEnabled(true);
-    ui->openFile->setEnabled(true);
+//    QList<QPushButton*> btns = ui->widget->findChildren<QPushButton*>();
+//    foreach (QPushButton* btn, btns) {
+//        btn->setEnabled(true);
+//    }
+    ui->selectDevice->setEnabled(false);
+    ui->openFile->setEnabled(false);
     ui->loadFile->setEnabled(true);
     ui->model->setEnabled(true);
     ui->startDetect->setEnabled(false);
@@ -260,3 +342,5 @@ void Playback::on_reset_clicked() {
                                      "    重置\n"
                                      "==============\n"));
 }
+
+

@@ -241,6 +241,7 @@ Makefile: ..\player\player.pro ..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\qt_config.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc\qmake.conf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\spec_post.prf \
+		.qmake.stash \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\common\msvc-version.conf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\toolchain.prf \
@@ -250,6 +251,7 @@ Makefile: ..\player\player.pro ..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\resolve_config.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds_post.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\default_post.prf \
+		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\win32\console.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\warn_off.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\resources.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\qtquickcompiler.prf \
@@ -260,7 +262,6 @@ Makefile: ..\player\player.pro ..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\uic.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\qmake_use.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\file_copies.prf \
-		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\win32\windows.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\testcase_targets.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\exceptions.prf \
 		..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\yacc.prf \
@@ -268,8 +269,7 @@ Makefile: ..\player\player.pro ..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc
 		..\player\player.pro \
 		..\..\..\..\5.12.1\msvc2017_64\lib\Qt5Widgets.prl \
 		..\..\..\..\5.12.1\msvc2017_64\lib\Qt5Gui.prl \
-		..\..\..\..\5.12.1\msvc2017_64\lib\Qt5Core.prl \
-		..\..\..\..\5.12.1\msvc2017_64\lib\qtmain.prl
+		..\..\..\..\5.12.1\msvc2017_64\lib\Qt5Core.prl
 	$(QMAKE) -o Makefile ..\player\player.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\spec_pre.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\common\angle.conf:
@@ -435,6 +435,7 @@ Makefile: ..\player\player.pro ..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\qt_config.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc\qmake.conf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\spec_post.prf:
+.qmake.stash:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\common\msvc-version.conf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\toolchain.prf:
@@ -444,6 +445,7 @@ Makefile: ..\player\player.pro ..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\resolve_config.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds_post.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\default_post.prf:
+..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\win32\console.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\warn_off.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\resources.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\qtquickcompiler.prf:
@@ -454,7 +456,6 @@ Makefile: ..\player\player.pro ..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\uic.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\qmake_use.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\file_copies.prf:
-..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\win32\windows.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\testcase_targets.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\exceptions.prf:
 ..\..\..\..\5.12.1\msvc2017_64\mkspecs\features\yacc.prf:
@@ -463,7 +464,6 @@ Makefile: ..\player\player.pro ..\..\..\..\5.12.1\msvc2017_64\mkspecs\win32-msvc
 ..\..\..\..\5.12.1\msvc2017_64\lib\Qt5Widgets.prl:
 ..\..\..\..\5.12.1\msvc2017_64\lib\Qt5Gui.prl:
 ..\..\..\..\5.12.1\msvc2017_64\lib\Qt5Core.prl:
-..\..\..\..\5.12.1\msvc2017_64\lib\qtmain.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\player\player.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
 

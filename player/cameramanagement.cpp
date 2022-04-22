@@ -2,12 +2,14 @@
 #include "ui_cameramanagement.h"
 #include <qtextcodec.h>
 
+
 CameraManagement::CameraManagement(RealMainWindow* w, QWidget* parent) :
     QWidget(parent),
     ui(new Ui::CameraManagement),
     m_realmainwindow(w) {
     ui->setupUi(this);
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("GB2312"));
+    //QTextCodec::setCodecForLocale(QTextCodec::codecForName("GB2312"));
+
     ui->tableInfo->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
 
     initTable();
@@ -35,9 +37,9 @@ void CameraManagement::on_btnClear_clicked() {
 }
 
 void CameraManagement::initTable() {
-    appendInfo("设备1", "rtmp://hls.hsrtv.cn/hls/hstv1");
-    appendInfo("设备2", "rtmp://hls.hsrtv.cn/hls/hstv2");
-    appendInfo("设备3", "rtmp://10.196.80.19:1935/record/DJI_1.MP4");
+    appendInfo(QStringLiteral("设备1"), "rtmp://hls.hsrtv.cn/hls/hstv1");
+    appendInfo(QStringLiteral("设备2"), "rtmp://hls.hsrtv.cn/hls/hstv2");
+    appendInfo(QStringLiteral("设备3"), "rtmp://10.196.80.19:1935/record/DJI_1.MP4");
     ui->btnSave->click();
 }
 
@@ -112,7 +114,7 @@ void CameraManagement::on_btnSave_clicked() {
     if (existEmptyCell()) {
         QMessageBox::critical(this, QStringLiteral("摄像头管理 - 错误"), QStringLiteral("存在空项，无法保存"));
     } else if (existDuplicateDevice()) {
-        QMessageBox::critical(this, "摄像头管理 - 错误", "存在同名设备，无法保存");
+        QMessageBox::critical(this, QStringLiteral("摄像头管理 - 错误"), QStringLiteral("存在同名设备，无法保存"));
     } else {
         saveInfo();
     }

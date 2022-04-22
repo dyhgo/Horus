@@ -188,7 +188,7 @@ public:
         labIcon->setText(QString());
         labTitle->setText(QString());
         btnMonitor->setText(QApplication::translate("RealMainWindow", "\350\247\206 \351\242\221 \347\233\221 \346\216\247", nullptr));
-        btnPlayback->setText(QApplication::translate("RealMainWindow", "\350\247\206 \351\242\221 \345\233\236 \346\224\276", nullptr));
+        btnPlayback->setText(QApplication::translate("RealMainWindow", "\346\231\272 \350\203\275 \346\243\200 \346\265\213", nullptr));
         btnSettings->setText(QApplication::translate("RealMainWindow", "\347\263\273 \347\273\237 \350\256\276 \347\275\256", nullptr));
         btnMinimize->setText(QString());
         btnMaximize->setText(QString());

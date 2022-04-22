@@ -15,6 +15,9 @@
 #include <iostream>
 #include <yolov5.h>
 #include <chrono>
+#include "realmainwindow.h"
+#include <QDialog>
+#include <QListWidget>
 
 #pragma execution_character_set("utf-8")
 
@@ -59,6 +62,10 @@ class Playback : public QWidget {
     void on_reset_clicked();
 
   private:
+
+    void initSelectDeviceDialog(QDialog* dialog);
+
+  private:
     Ui::Playback* ui;
 
     QTimer* timer;
@@ -69,6 +76,15 @@ class Playback : public QWidget {
     NetConfig* yolo_nets;
     std::vector<cv::Rect> bboxes;
     int IsDetect_ok = 0;
+
+    QDialog* dialog = nullptr;  // crashed without nullptr
+
+    QListWidget* listWidget;
+
+
+  public:
+
+    RealMainWindow* rmw;
 };
 
 #endif // PLAYBACK_H

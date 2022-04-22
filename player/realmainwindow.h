@@ -1,9 +1,9 @@
-#ifndef REALMAINWINDOW_H
+﻿#ifndef REALMAINWINDOW_H
 #define REALMAINWINDOW_H
 
 #include <QWidget>
 //#include "mainwindow.h"
-#include "playback.h"
+//#include "playback.h"
 //#include "settings.h"
 #include <QMouseEvent>
 #include <QPoint>
