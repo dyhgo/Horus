@@ -144,42 +144,6 @@ void Playback::on_selectDevice_clicked() {
         double rate = capture->get(cv::CAP_PROP_FPS);
         ui->textEditlog->appendPlainText(QString("帧率为: %1 ").arg(rate));
     }
-
-
-
-    /*
-
-        std::string str = "rtmp://10.196.80.19:1935/record/DJI_1.MP4";
-        capture->open(str);
-        ui->lab_msg->setText(QString::fromStdString(str));
-
-        if (!capture->isOpened()) {
-            ui->textEditlog->appendPlainText("fail to open MP4!\n");
-            return;
-        }
-        //IsDetect_ok += 1;
-    //        if (IsDetect_ok == 2)
-    //            ui->startDetect->setEnabled(true);
-
-        ui->startDetect->setEnabled(true);
-        ui->textEditlog->appendPlainText(QString("Open video: %1 succesfully!").arg(QString::fromStdString(str)));
-
-        //获取整个帧数QStringLiteral
-        long totalFrame = capture->get(cv::CAP_PROP_FRAME_COUNT);
-        int width = capture->get(cv::CAP_PROP_FRAME_WIDTH);
-        int height = capture->get(cv::CAP_PROP_FRAME_HEIGHT);
-        ui->textEditlog->appendPlainText(QString("整个视频共 %1 帧, 宽=%2 高=%3 ").arg(totalFrame).arg(width).arg(height));
-        //ui->lab_video->resize(QSize(width, height));
-
-        //设置开始帧()
-        long frameToStart = 0;
-        capture->set(cv::CAP_PROP_POS_FRAMES, frameToStart);
-        ui->textEditlog->appendPlainText(QString("从第 %1 帧开始读").arg(frameToStart));
-
-        //获取帧率
-        double rate = capture->get(cv::CAP_PROP_FPS);
-        ui->textEditlog->appendPlainText(QString("帧率为: %1 ").arg(rate));
-    */
 }
 
 void Playback::on_openFile_clicked() {

@@ -23,7 +23,8 @@ public:
     {
         if (SysSettings->objectName().isEmpty())
             SysSettings->setObjectName(QString::fromUtf8("SysSettings"));
-        SysSettings->resize(400, 300);
+        SysSettings->resize(652, 419);
+        SysSettings->setStyleSheet(QString::fromUtf8(""));
 
         retranslateUi(SysSettings);
 

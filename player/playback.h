@@ -21,9 +21,9 @@
 
 #pragma execution_character_set("utf-8")
 
-#ifdef QT_NO_DEBUG
+//#ifdef QT_NO_DEBUG
 #pragma comment(lib, "D:/opencv/build/install/x64/vc15/lib/opencv_world455.lib")
-#endif
+//#endif
 
 
 

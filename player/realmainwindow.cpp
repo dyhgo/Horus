@@ -14,6 +14,7 @@ RealMainWindow::RealMainWindow(QWidget* parent) :
     QWidget(parent),
     ui(new Ui::RealMainWindow) {
     ui->setupUi(this);
+
     init();
 
 }
@@ -211,7 +212,7 @@ void RealMainWindow::init() {
     QFont font;
     font.setPixelSize(30);
     ui->labTitle->setFont(font);
-    ui->labTitle->setText("智能视频监控平台");
+    ui->labTitle->setText("AI智能视频监控平台");
 
     //    MainWindow* w = new MainWindow();
     //    ui->tabWidget->clear();

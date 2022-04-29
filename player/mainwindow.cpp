@@ -20,6 +20,8 @@ void MainWindow::setActionForButton() {
 
 void MainWindow::init() {
 
+
+
     QList<QToolButton*> btns = ui->widgetMulti->findChildren<QToolButton*>();
 
     foreach (QToolButton* btn, btns) {
@@ -156,6 +158,19 @@ void MainWindow::btnClicked_mainwindow_slot(const QString& objName) {
     } else if (objName == "btnFlowVideo") {
         widget->ui->playwidget->setUrl(m_realmainwindow->map[item->text(0)]);
         widget->ui->playwidget->open();
+    } else if (objName == "btnFlowSnap") {
+        QString dirName = QCoreApplication::applicationDirPath() + "/snap";
+        QDir dir(dirName);
+        if (!dir.exists()) {
+            dir.mkdir(dirName);
+        }
+        QString picPath = QCoreApplication::applicationDirPath() + QString("/snap/%1.jpg").arg(STRDATETIME);
+        widget->ui->playwidget->image.save(picPath, "JPG");
+        QMessageBox* box = new QMessageBox(QMessageBox::Information, QString("截图保存"), QString("图片保存到") + picPath);
+        box->show();
+        box->button(QMessageBox::Ok)->hide();
+        QTimer::singleShot(5000, box, SLOT(accept()));
+        // TODO : 判断是否打开视频
     }
 }
 

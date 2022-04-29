@@ -15,14 +15,14 @@ class FFmpegThread : public QThread {
 
 
   public:
-    explicit FFmpegThread(QObject* parent = 0);
+    explicit FFmpegThread(QObject* parent = nullptr);
     static void initlib();
 
   protected:
-    void run();
+    void run() Q_DECL_OVERRIDE;
 
   private:
-    volatile bool stopped;          //线程停止标志位
+    bool stopped;          //线程停止标志位
     volatile bool isPlay;           //播放视频标志位
 
     int frameFinish;                //一帧完成
@@ -78,14 +78,16 @@ class FFmpegWidget : public QWidget {
     Q_PROPERTY(QColor flowBgColor READ getFlowBgColor WRITE setFlowBgColor)
     Q_PROPERTY(QColor flowPressColor READ getFlowPressColor WRITE setFlowPressColor)
   public:
-    explicit FFmpegWidget(QWidget* parent = 0);
-    ~FFmpegWidget();
+    explicit FFmpegWidget(QWidget* parent = nullptr);
+    ~FFmpegWidget() override;
 
   protected:
-    void paintEvent(QPaintEvent*);
+    void paintEvent(QPaintEvent*) override;
 
   private:
     FFmpegThread* thread;
+  public:
+
     QImage image;
 
   private slots:

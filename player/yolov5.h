@@ -65,7 +65,5 @@ class YOLOV5 {
     void sigmoid(cv::Mat* out, int length);
 };
 
-static inline float sigmoid_x(float x) {
-    return static_cast<float>(1.f / (1.f + exp(-x)));
-}
+
 #endif // YOLOV5_H

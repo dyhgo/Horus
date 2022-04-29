@@ -40,7 +40,12 @@ void CameraManagement::initTable() {
     appendInfo(QStringLiteral("设备1"), "rtmp://hls.hsrtv.cn/hls/hstv1");
     appendInfo(QStringLiteral("设备2"), "rtmp://hls.hsrtv.cn/hls/hstv2");
     appendInfo(QStringLiteral("设备3"), "rtmp://10.196.80.19:1935/record/DJI_1.MP4");
-    ui->btnSave->click();
+    appendInfo(QStringLiteral("设备4"), "rtmp://10.196.80.19:1935/record/DJI_2.MP4");
+    appendInfo(QStringLiteral("设备5"), "http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4");
+    appendInfo(QStringLiteral("设备6"), "rtmp://livetv.dhtv.cn:1935/live/peoples");
+    appendInfo(QStringLiteral("设备7"), "rtmp://livetv.dhtv.cn:1935/live/citylife");
+    appendInfo(QStringLiteral("设备8"), "rtmp://livetv.dhtv.cn:1935/live/news");
+    saveInfo();
 }
 
 
@@ -117,5 +122,6 @@ void CameraManagement::on_btnSave_clicked() {
         QMessageBox::critical(this, QStringLiteral("摄像头管理 - 错误"), QStringLiteral("存在同名设备，无法保存"));
     } else {
         saveInfo();
+        QMessageBox::information(this, QStringLiteral("摄像头管理 - 提示"), QStringLiteral("保存成功"));
     }
 }

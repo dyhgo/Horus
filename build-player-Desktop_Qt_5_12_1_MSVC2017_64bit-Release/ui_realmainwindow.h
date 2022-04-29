@@ -52,6 +52,7 @@ public:
         RealMainWindow->setMinimumSize(QSize(500, 100));
         RealMainWindow->setCursor(QCursor(Qt::ArrowCursor));
         RealMainWindow->setMouseTracking(true);
+        RealMainWindow->setStyleSheet(QString::fromUtf8(""));
         gridLayout_2 = new QGridLayout(RealMainWindow);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout_2->setContentsMargins(1, 1, 1, 1);
@@ -116,6 +117,7 @@ public:
         btnSettings->setObjectName(QString::fromUtf8("btnSettings"));
         sizePolicy2.setHeightForWidth(btnSettings->sizePolicy().hasHeightForWidth());
         btnSettings->setSizePolicy(sizePolicy2);
+        btnSettings->setStyleSheet(QString::fromUtf8(""));
 
         horizontalLayout->addWidget(btnSettings);
 

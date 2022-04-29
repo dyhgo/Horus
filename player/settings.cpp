@@ -1,4 +1,4 @@
-#include "settings.h"
+﻿#include "settings.h"
 #include "ui_settings.h"
 #include "iconhelper.h"
 
@@ -7,6 +7,9 @@ Settings::Settings(RealMainWindow* w, QWidget* parent) :
     ui(new Ui::Settings),
     m_realmainwindow(w) {
     ui->setupUi(this);
+
+    ui->btnSysSettings->setVisible(false);
+
 
     btnsLeft << ui->btnSysSettings << ui->btnCameraManagement;
     ss = new SysSettings();
@@ -21,6 +24,9 @@ Settings::Settings(RealMainWindow* w, QWidget* parent) :
     ui->btnSysSettings->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     IconHelper::setIcon(ui->btnCameraManagement, QColor("white"), 0xe9fe, 30);
     ui->btnCameraManagement->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+
+    ui->btnCameraManagement->click();
 }
 
 Settings::~Settings() {
@@ -45,7 +51,7 @@ void Settings::on_btnCameraManagement_clicked() {
     foreach (QToolButton* btn, btnsLeft) {
         btn->setChecked(btn == ui->btnCameraManagement);
     }
-    ui->settingsInterface->removeEventFilter(ss);
+    ui->settingsInterface->removeWidget(ss);
     ss->setVisible(false);
     ui->settingsInterface->addWidget(cm, 0, 0);
     cm->setVisible(true);

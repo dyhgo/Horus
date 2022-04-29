@@ -59,7 +59,7 @@ FORMS += \
     cameramanagement.ui \
     syssettings.ui
 
-CONFIG += warn_off console
+CONFIG += warn_off
 
 INCLUDEPATH += $$PWD/ffmpeg
 include ($$PWD/ffmpeg/ffmpeg.pri)

@@ -45,8 +45,11 @@ bool YOLOV5::loadModel(const char* onnxfile) {
 }
 
 void YOLOV5::detect(cv::Mat& frame) {
+    //Creates 4-dimensional blob from image.
     cv::dnn::blobFromImage(frame, blob, 1 / 255.0, Size(this->inpWidth, this->inpHeight), Scalar(0, 0, 0), true, false);
+    //Sets the new input value for the network
     this->net.setInput(blob);
+    //Runs forward pass to compute outputs of layers listed in @p outBlobNames.
     this->net.forward(outs, this->net.getUnconnectedOutLayersNames());
 
     /////generate proposals
