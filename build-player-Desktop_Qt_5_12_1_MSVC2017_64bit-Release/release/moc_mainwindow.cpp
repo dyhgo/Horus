@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../player/mainwindow.h"
+#include "../../Horus/mainwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[10];
-    char stringdata0[178];
+    QByteArrayData data[6];
+    char stringdata0[89];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,22 +32,16 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 19), // "on_actOne_triggered"
+QT_MOC_LITERAL(1, 11, 19), // "on_btnClose_clicked"
 QT_MOC_LITERAL(2, 31, 0), // ""
-QT_MOC_LITERAL(3, 32, 20), // "on_actFour_triggered"
-QT_MOC_LITERAL(4, 53, 20), // "on_actNine_triggered"
-QT_MOC_LITERAL(5, 74, 23), // "on_actSixteen_triggered"
-QT_MOC_LITERAL(6, 98, 40), // "on_MainWindow_customContextMe..."
-QT_MOC_LITERAL(7, 139, 3), // "pos"
-QT_MOC_LITERAL(8, 143, 26), // "btnClicked_mainwindow_slot"
-QT_MOC_LITERAL(9, 170, 7) // "objName"
+QT_MOC_LITERAL(3, 32, 22), // "on_btnMaximize_clicked"
+QT_MOC_LITERAL(4, 55, 22), // "on_btnMinimize_clicked"
+QT_MOC_LITERAL(5, 78, 10) // "btnClicked"
 
     },
-    "MainWindow\0on_actOne_triggered\0\0"
-    "on_actFour_triggered\0on_actNine_triggered\0"
-    "on_actSixteen_triggered\0"
-    "on_MainWindow_customContextMenuRequested\0"
-    "pos\0btnClicked_mainwindow_slot\0objName"
+    "MainWindow\0on_btnClose_clicked\0\0"
+    "on_btnMaximize_clicked\0on_btnMinimize_clicked\0"
+    "btnClicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,7 +51,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -65,20 +59,16 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x08 /* Private */,
-       3,    0,   45,    2, 0x08 /* Private */,
-       4,    0,   46,    2, 0x08 /* Private */,
-       5,    0,   47,    2, 0x08 /* Private */,
-       6,    1,   48,    2, 0x08 /* Private */,
-       8,    1,   51,    2, 0x08 /* Private */,
+       1,    0,   34,    2, 0x08 /* Private */,
+       3,    0,   35,    2, 0x08 /* Private */,
+       4,    0,   36,    2, 0x08 /* Private */,
+       5,    0,   37,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QPoint,    7,
-    QMetaType::Void, QMetaType::QString,    9,
 
        0        // eod
 };
@@ -89,15 +79,14 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_actOne_triggered(); break;
-        case 1: _t->on_actFour_triggered(); break;
-        case 2: _t->on_actNine_triggered(); break;
-        case 3: _t->on_actSixteen_triggered(); break;
-        case 4: _t->on_MainWindow_customContextMenuRequested((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
-        case 5: _t->btnClicked_mainwindow_slot((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 0: _t->on_btnClose_clicked(); break;
+        case 1: _t->on_btnMaximize_clicked(); break;
+        case 2: _t->on_btnMinimize_clicked(); break;
+        case 3: _t->btnClicked(); break;
         default: ;
         }
     }
+    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = { {
@@ -129,13 +118,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 4;
     }
     return _id;
 }

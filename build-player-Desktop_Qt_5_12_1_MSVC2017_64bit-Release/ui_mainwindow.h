@@ -10,15 +10,14 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QToolButton>
-#include <QtWidgets/QTreeWidget>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,134 +25,161 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actOne;
-    QAction *actFour;
-    QAction *actNine;
-    QAction *actSixteen;
     QGridLayout *gridLayout_2;
-    QWidget *widgetGrid;
-    QGridLayout *gridLayout_3;
-    QGridLayout *gridLayout;
-    QWidget *widgetDevice;
-    QVBoxLayout *verticalLayout;
-    QTreeWidget *treeDevices;
-    QWidget *widgetMulti;
-    QHBoxLayout *horizontalLayout;
-    QToolButton *btnOne;
-    QToolButton *btnFour;
-    QToolButton *btnNine;
-    QToolButton *btnSixteen;
+    QWidget *widgetTitle;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *labIcon;
+    QLabel *labTitle;
     QSpacerItem *horizontalSpacer;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QToolButton *btnMonitor;
+    QToolButton *btnPlayback;
+    QToolButton *btnSettings;
+    QWidget *widget_2;
+    QGridLayout *gridLayout;
+    QPushButton *btnMinimize;
+    QPushButton *btnMaximize;
+    QPushButton *btnClose;
+    QSpacerItem *verticalSpacer;
+    QStackedWidget *stackedWidget;
 
     void setupUi(QWidget *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(920, 691);
-        MainWindow->setContextMenuPolicy(Qt::CustomContextMenu);
-        actOne = new QAction(MainWindow);
-        actOne->setObjectName(QString::fromUtf8("actOne"));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8(":/res/images/QDarkStyleSheet/z_one.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actOne->setIcon(icon);
-        actFour = new QAction(MainWindow);
-        actFour->setObjectName(QString::fromUtf8("actFour"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/res/images/QDarkStyleSheet/z_four.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actFour->setIcon(icon1);
-        actNine = new QAction(MainWindow);
-        actNine->setObjectName(QString::fromUtf8("actNine"));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/res/images/QDarkStyleSheet/z_nine.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actNine->setIcon(icon2);
-        actSixteen = new QAction(MainWindow);
-        actSixteen->setObjectName(QString::fromUtf8("actSixteen"));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/res/images/QDarkStyleSheet/z_sixteen.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actSixteen->setIcon(icon3);
+        MainWindow->resize(800, 600);
+        MainWindow->setMinimumSize(QSize(500, 100));
+        MainWindow->setCursor(QCursor(Qt::ArrowCursor));
+        MainWindow->setMouseTracking(true);
+        MainWindow->setStyleSheet(QString::fromUtf8(""));
         gridLayout_2 = new QGridLayout(MainWindow);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        widgetGrid = new QWidget(MainWindow);
-        widgetGrid->setObjectName(QString::fromUtf8("widgetGrid"));
-        gridLayout_3 = new QGridLayout(widgetGrid);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        gridLayout_3->setContentsMargins(1, 1, 1, 1);
-        gridLayout = new QGridLayout();
-        gridLayout->setSpacing(0);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-
-        gridLayout_3->addLayout(gridLayout, 0, 0, 1, 1);
-
-
-        gridLayout_2->addWidget(widgetGrid, 0, 0, 1, 1);
-
-        widgetDevice = new QWidget(MainWindow);
-        widgetDevice->setObjectName(QString::fromUtf8("widgetDevice"));
-        widgetDevice->setMinimumSize(QSize(170, 0));
-        widgetDevice->setMaximumSize(QSize(170, 16777215));
-        verticalLayout = new QVBoxLayout(widgetDevice);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        treeDevices = new QTreeWidget(widgetDevice);
-        treeDevices->setObjectName(QString::fromUtf8("treeDevices"));
-
-        verticalLayout->addWidget(treeDevices);
-
-
-        gridLayout_2->addWidget(widgetDevice, 0, 1, 2, 1);
-
-        widgetMulti = new QWidget(MainWindow);
-        widgetMulti->setObjectName(QString::fromUtf8("widgetMulti"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        gridLayout_2->setContentsMargins(1, 1, 1, 1);
+        widgetTitle = new QWidget(MainWindow);
+        widgetTitle->setObjectName(QString::fromUtf8("widgetTitle"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(widgetMulti->sizePolicy().hasHeightForWidth());
-        widgetMulti->setSizePolicy(sizePolicy);
-        horizontalLayout = new QHBoxLayout(widgetMulti);
+        sizePolicy.setHeightForWidth(widgetTitle->sizePolicy().hasHeightForWidth());
+        widgetTitle->setSizePolicy(sizePolicy);
+        widgetTitle->setMinimumSize(QSize(0, 70));
+        widgetTitle->setMaximumSize(QSize(16777215, 70));
+        horizontalLayout_2 = new QHBoxLayout(widgetTitle);
+        horizontalLayout_2->setSpacing(20);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        labIcon = new QLabel(widgetTitle);
+        labIcon->setObjectName(QString::fromUtf8("labIcon"));
+
+        horizontalLayout_2->addWidget(labIcon);
+
+        labTitle = new QLabel(widgetTitle);
+        labTitle->setObjectName(QString::fromUtf8("labTitle"));
+
+        horizontalLayout_2->addWidget(labTitle);
+
+        horizontalSpacer = new QSpacerItem(424, 38, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+        widget = new QWidget(widgetTitle);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
+        widget->setSizePolicy(sizePolicy1);
+        widget->setMinimumSize(QSize(0, 0));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setSpacing(1);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         horizontalLayout->setContentsMargins(1, 1, 1, 1);
-        btnOne = new QToolButton(widgetMulti);
-        btnOne->setObjectName(QString::fromUtf8("btnOne"));
-        sizePolicy.setHeightForWidth(btnOne->sizePolicy().hasHeightForWidth());
-        btnOne->setSizePolicy(sizePolicy);
-        btnOne->setMaximumSize(QSize(16777215, 16777215));
-        btnOne->setIconSize(QSize(19, 19));
-        btnOne->setCheckable(false);
-        btnOne->setChecked(false);
-        btnOne->setToolButtonStyle(Qt::ToolButtonIconOnly);
+        btnMonitor = new QToolButton(widget);
+        btnMonitor->setObjectName(QString::fromUtf8("btnMonitor"));
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(btnMonitor->sizePolicy().hasHeightForWidth());
+        btnMonitor->setSizePolicy(sizePolicy2);
+        btnMonitor->setPopupMode(QToolButton::InstantPopup);
 
-        horizontalLayout->addWidget(btnOne);
+        horizontalLayout->addWidget(btnMonitor);
 
-        btnFour = new QToolButton(widgetMulti);
-        btnFour->setObjectName(QString::fromUtf8("btnFour"));
-        sizePolicy.setHeightForWidth(btnFour->sizePolicy().hasHeightForWidth());
-        btnFour->setSizePolicy(sizePolicy);
+        btnPlayback = new QToolButton(widget);
+        btnPlayback->setObjectName(QString::fromUtf8("btnPlayback"));
+        sizePolicy2.setHeightForWidth(btnPlayback->sizePolicy().hasHeightForWidth());
+        btnPlayback->setSizePolicy(sizePolicy2);
 
-        horizontalLayout->addWidget(btnFour);
+        horizontalLayout->addWidget(btnPlayback);
 
-        btnNine = new QToolButton(widgetMulti);
-        btnNine->setObjectName(QString::fromUtf8("btnNine"));
-        sizePolicy.setHeightForWidth(btnNine->sizePolicy().hasHeightForWidth());
-        btnNine->setSizePolicy(sizePolicy);
+        btnSettings = new QToolButton(widget);
+        btnSettings->setObjectName(QString::fromUtf8("btnSettings"));
+        sizePolicy2.setHeightForWidth(btnSettings->sizePolicy().hasHeightForWidth());
+        btnSettings->setSizePolicy(sizePolicy2);
+        btnSettings->setStyleSheet(QString::fromUtf8(""));
 
-        horizontalLayout->addWidget(btnNine);
-
-        btnSixteen = new QToolButton(widgetMulti);
-        btnSixteen->setObjectName(QString::fromUtf8("btnSixteen"));
-        sizePolicy.setHeightForWidth(btnSixteen->sizePolicy().hasHeightForWidth());
-        btnSixteen->setSizePolicy(sizePolicy);
-
-        horizontalLayout->addWidget(btnSixteen);
-
-        horizontalSpacer = new QSpacerItem(586, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
+        horizontalLayout->addWidget(btnSettings);
 
 
-        gridLayout_2->addWidget(widgetMulti, 1, 0, 1, 1);
+        horizontalLayout_2->addWidget(widget);
+
+        widget_2 = new QWidget(widgetTitle);
+        widget_2->setObjectName(QString::fromUtf8("widget_2"));
+        sizePolicy1.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
+        widget_2->setSizePolicy(sizePolicy1);
+        widget_2->setMaximumSize(QSize(70, 16777215));
+        gridLayout = new QGridLayout(widget_2);
+        gridLayout->setSpacing(1);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
+        btnMinimize = new QPushButton(widget_2);
+        btnMinimize->setObjectName(QString::fromUtf8("btnMinimize"));
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(btnMinimize->sizePolicy().hasHeightForWidth());
+        btnMinimize->setSizePolicy(sizePolicy3);
+        btnMinimize->setMaximumSize(QSize(16777215, 20));
+
+        gridLayout->addWidget(btnMinimize, 0, 0, 1, 1);
+
+        btnMaximize = new QPushButton(widget_2);
+        btnMaximize->setObjectName(QString::fromUtf8("btnMaximize"));
+        sizePolicy3.setHeightForWidth(btnMaximize->sizePolicy().hasHeightForWidth());
+        btnMaximize->setSizePolicy(sizePolicy3);
+        btnMaximize->setMaximumSize(QSize(16777215, 20));
+
+        gridLayout->addWidget(btnMaximize, 0, 1, 1, 1);
+
+        btnClose = new QPushButton(widget_2);
+        btnClose->setObjectName(QString::fromUtf8("btnClose"));
+        sizePolicy3.setHeightForWidth(btnClose->sizePolicy().hasHeightForWidth());
+        btnClose->setSizePolicy(sizePolicy3);
+        btnClose->setMaximumSize(QSize(16777215, 20));
+
+        gridLayout->addWidget(btnClose, 0, 2, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 46, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 1, 1, 1, 1);
+
+
+        horizontalLayout_2->addWidget(widget_2);
+
+
+        gridLayout_2->addWidget(widgetTitle, 0, 0, 1, 1);
+
+        stackedWidget = new QStackedWidget(MainWindow);
+        stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
+
+        gridLayout_2->addWidget(stackedWidget, 1, 0, 1, 1);
 
 
         retranslateUi(MainWindow);
+
+        stackedWidget->setCurrentIndex(-1);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -161,40 +187,14 @@ public:
     void retranslateUi(QWidget *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        actOne->setText(QApplication::translate("MainWindow", "1\347\224\273\351\235\242", nullptr));
-#ifndef QT_NO_TOOLTIP
-        actOne->setToolTip(QApplication::translate("MainWindow", "1\347\224\273\351\235\242", nullptr));
-#endif // QT_NO_TOOLTIP
-#ifndef QT_NO_SHORTCUT
-        actOne->setShortcut(QApplication::translate("MainWindow", "F1", nullptr));
-#endif // QT_NO_SHORTCUT
-        actFour->setText(QApplication::translate("MainWindow", "4\347\224\273\351\235\242", nullptr));
-#ifndef QT_NO_TOOLTIP
-        actFour->setToolTip(QApplication::translate("MainWindow", "4\347\224\273\351\235\242", nullptr));
-#endif // QT_NO_TOOLTIP
-#ifndef QT_NO_SHORTCUT
-        actFour->setShortcut(QApplication::translate("MainWindow", "F2", nullptr));
-#endif // QT_NO_SHORTCUT
-        actNine->setText(QApplication::translate("MainWindow", "9\347\224\273\351\235\242", nullptr));
-#ifndef QT_NO_TOOLTIP
-        actNine->setToolTip(QApplication::translate("MainWindow", "9\347\224\273\351\235\242", nullptr));
-#endif // QT_NO_TOOLTIP
-#ifndef QT_NO_SHORTCUT
-        actNine->setShortcut(QApplication::translate("MainWindow", "F3", nullptr));
-#endif // QT_NO_SHORTCUT
-        actSixteen->setText(QApplication::translate("MainWindow", "16\347\224\273\351\235\242", nullptr));
-#ifndef QT_NO_TOOLTIP
-        actSixteen->setToolTip(QApplication::translate("MainWindow", "16\347\224\273\351\235\242", nullptr));
-#endif // QT_NO_TOOLTIP
-#ifndef QT_NO_SHORTCUT
-        actSixteen->setShortcut(QApplication::translate("MainWindow", "F4", nullptr));
-#endif // QT_NO_SHORTCUT
-        QTreeWidgetItem *___qtreewidgetitem = treeDevices->headerItem();
-        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "\350\256\276\345\244\207\345\210\227\350\241\250", nullptr));
-        btnOne->setText(QString());
-        btnFour->setText(QString());
-        btnNine->setText(QString());
-        btnSixteen->setText(QString());
+        labIcon->setText(QString());
+        labTitle->setText(QString());
+        btnMonitor->setText(QApplication::translate("MainWindow", "\350\247\206 \351\242\221 \347\233\221 \346\216\247", nullptr));
+        btnPlayback->setText(QApplication::translate("MainWindow", "\346\231\272 \350\203\275 \346\243\200 \346\265\213", nullptr));
+        btnSettings->setText(QApplication::translate("MainWindow", "\347\263\273 \347\273\237 \350\256\276 \347\275\256", nullptr));
+        btnMinimize->setText(QString());
+        btnMaximize->setText(QString());
+        btnClose->setText(QString());
     } // retranslateUi
 
 };
