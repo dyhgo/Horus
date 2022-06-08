@@ -42,7 +42,7 @@ void AIDetect::init() {
     };
     conf = yolo_nets[0];
     yolov5 = new YOLOV5();
-    yolov5->Initialization(conf);
+    yolov5->init(conf);
     ui->textEditlog->appendPlainText(QString("默认模型类别：yolov5s args: %1 %2 %3")
                                      .arg(static_cast<double>(conf.nmsThreshold))
                                      .arg(static_cast<double>(conf.objThreshold))
@@ -180,8 +180,8 @@ void AIDetect::on_openFile_clicked() {
         std::chrono::duration<double, std::milli> elapsed = end - start;
         ui->textEditlog->appendPlainText(QString("cost_time: %1 ms").arg(elapsed.count()));
         QImage img = QImage(static_cast<uchar*>(temp.data), temp.cols, temp.rows, static_cast<int>(temp.step), QImage::Format_RGB888);
-        ui->lab_video->setPixmap(QPixmap::fromImage(img));
-        //ui->lab_video->resize(ui->lab_video->pixmap()->size());
+        ui->lab_video->setPixmap(QPixmap::fromImage(img).scaled(ui->lab_video->width(), ui->lab_video->height()));
+        //ui->lab_video->resize(QSize(img.width(), img.height()));
         filename.clear();
     } else if (mime.name().startsWith("video/")) {
         //filename = "rtmp://10.196.80.19:1935/record/DJI_1.MP4";
@@ -249,7 +249,7 @@ void AIDetect::on_model_activated(const QString& arg1) {
     } else if (arg1.contains("x")) {
         conf = yolo_nets[3];
     }
-    yolov5->Initialization(conf);
+    yolov5->init(conf);
     ui->textEditlog->appendPlainText(QString("使用模型类别：%1 args: %2 %3 %4")
                                      .arg(arg1)
                                      .arg(static_cast<double>(conf.nmsThreshold))
@@ -301,6 +301,7 @@ void AIDetect::on_reset_clicked() {
     ui->startDetect->setEnabled(false);
     ui->stopDetect->setEnabled(false);
     ui->lab_video->clear();
+    ui->lab_msg->clear();
     //capture->release();
     ui->textEditlog->appendPlainText(QString("==============\n"
                                      "    重置\n"

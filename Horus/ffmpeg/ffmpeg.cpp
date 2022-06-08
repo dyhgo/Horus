@@ -96,6 +96,12 @@ bool FFmpegThread::init() {
     //自动开启线程数
     av_dict_set(&options, "threads", "auto", 0);
 
+
+    //av_dict_set(&options, "x264-params", "bitrate=32:force-cfr=1", 0);
+    //av_dict_set(&options, "preset", "ultrafast", 0);
+    //av_dict_set(&options, "tune", "zerolatency", 0);
+    //av_dict_set(&options, "crf", "51", 0);
+
     //打开视频流, AVFormatContext是一个媒体文件或媒体流的构成和基本信息
     avFormatContext = avformat_alloc_context();
 
@@ -252,7 +258,9 @@ void FFmpegThread::run() {
     while (!stopped) {
         //根据标志位执行初始化操作
         if (isPlay) {
-            this->init();   // init once
+            if (!this->init()) {
+                break;
+            }   // init once
             isPlay = false;
             continue;
         }

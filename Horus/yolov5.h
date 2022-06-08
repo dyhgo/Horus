@@ -22,7 +22,7 @@ struct NetConfig {
 class YOLOV5 {
   public:
     YOLOV5() {}
-    void Initialization(NetConfig conf);
+    void init(NetConfig conf);
     bool loadModel(const char* onnxfile);
     void detect(cv::Mat& frame);
   private:

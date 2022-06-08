@@ -1,7 +1,7 @@
 ﻿#include "yolov5.h"
 
 
-void YOLOV5::Initialization(NetConfig conf) {
+void YOLOV5::init(NetConfig conf) {
     this->confThreshold = conf.confThreshold;
     this->nmsThreshold = conf.nmsThreshold;
     this->objThreshold = conf.objThreshold;

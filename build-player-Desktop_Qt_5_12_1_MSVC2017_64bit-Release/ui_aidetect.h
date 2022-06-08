@@ -46,7 +46,7 @@ public:
     {
         if (AIDetect->objectName().isEmpty())
             AIDetect->setObjectName(QString::fromUtf8("AIDetect"));
-        AIDetect->resize(1182, 536);
+        AIDetect->resize(1088, 542);
         gridLayout = new QGridLayout(AIDetect);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         widget = new QWidget(AIDetect);
